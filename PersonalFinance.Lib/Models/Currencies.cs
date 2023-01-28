@@ -3,12 +3,12 @@ namespace PersonalFinance.Lib.Models
     /// <summary>
     /// Класс Валюта
     /// </summary>
-    public class Currency
+    public class Currencies
     {
         /// <summary>
-        ///  Id - идентификатор валюты
+        ///  IdCurrancy - идентификатор валюты
         /// </summary>
-        public int Id { get; set; }
+        public int IdCurrancy { get; set; }
 
         /// <summary>
         /// Name - имя валюты

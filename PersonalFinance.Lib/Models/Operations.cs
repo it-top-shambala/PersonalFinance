@@ -3,12 +3,12 @@ namespace PersonalFinance.Lib.Models
     /// <summary>
     /// класс Запись операции
     /// </summary>
-    public class LogOperation
+    public class Operations
     {
         /// <summary>
         /// идентификатор записи
         /// </summary>
-        public int Id { get; set; }
+        public int IdOperations { get; set; }
 
         /// <summary>
         /// идентификатор кошелька
@@ -21,13 +21,13 @@ namespace PersonalFinance.Lib.Models
         public DateTime? DateTime { get; set; }
 
         /// <summary>
-        /// идентификатор операции
+        /// идентификатор категории операции
         /// </summary>
-        public string? IdOperation { get; set; }
+        public string? IdCategory { get; set; }
 
         /// <summary>
         /// сумма операции
         /// </summary>
-        public double Sum { get; set; }
+        public double Summa { get; set; }
     }
 }

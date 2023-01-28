@@ -3,12 +3,12 @@ namespace PersonalFinance.Lib.Models
     /// <summary>
     /// Класс Кошелек
     /// </summary>
-    public class Wallet
+    public class Wallets
     {
         /// <summary>
-        ///  Id - идентификатор кошелька
+        ///  IdWallet - идентификатор кошелька
         /// </summary>
-        public int Id { get; set; }
+        public int IdWallet { get; set; }
 
         /// <summary>
         ///  Name - имя кошелька
@@ -16,9 +16,9 @@ namespace PersonalFinance.Lib.Models
         public string? Name { get; set; }
 
         /// <summary>
-        /// Currency - объект валюты
+        /// IdCurrency - идентификатор категории операции
         /// </summary>
-        public Currency? Currency { get; set; }
+        public int IdCurrency { get; set; }
 
         /// <summary>
         /// Balance - количество средств в кошельке
@@ -28,18 +28,10 @@ namespace PersonalFinance.Lib.Models
         /// <summary>
         /// Метод проведения операции с кошельком
         /// </summary>
-        /// <param name="sum">sum - сумма операции
-        /// положительное значение - сумма прихода
-        /// отрицательное значение - сумма расхода</param>
-        public bool WalletOperation(double sum)
+        /// <param name="summa">summa - сумма операции</param>
+        public void WalletOperation(double summa)
         {
-            if ((Balance += sum) >= 0)
-            {
-                return true;
-            }
-
-            Balance -= sum;
-            return false;
+            Balance += summa;
         }
     }
 }
