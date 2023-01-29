@@ -1,19 +1,19 @@
 namespace PersonalFinance.Lib.Models
 {
     /// <summary>
-    /// класс Запись операции
+    /// класс  Операция
     /// </summary>
-    public class Operations
+    public class Operation
     {
         /// <summary>
-        /// идентификатор записи
+        /// идентификатор операции
         /// </summary>
-        public int IdOperations { get; set; }
+        public int Operation_id { get; set; }
 
         /// <summary>
         /// идентификатор кошелька
         /// </summary>
-        public int IdWallet { get; set; }
+        public int Wallet_id { get; set; }
 
         /// <summary>
         /// время проведения операции
@@ -21,9 +21,9 @@ namespace PersonalFinance.Lib.Models
         public DateTime? DateTime { get; set; }
 
         /// <summary>
-        /// идентификатор категории операции
+        /// имя категории операции
         /// </summary>
-        public string? IdCategory { get; set; }
+        public string? Name_category { get; set; }
 
         /// <summary>
         /// сумма операции

@@ -6,22 +6,22 @@ namespace PersonalFinance.Lib.Models
     public class Wallets
     {
         /// <summary>
-        ///  IdWallet - идентификатор кошелька
+        ///  идентификатор кошелька
         /// </summary>
-        public int IdWallet { get; set; }
+        public int Wallet_id { get; set; }
 
         /// <summary>
-        ///  Name - имя кошелька
+        ///  имя кошелька
         /// </summary>
         public string? Name { get; set; }
 
         /// <summary>
-        /// IdCurrency - идентификатор категории операции
+        /// имя категории операции
         /// </summary>
-        public int IdCurrency { get; set; }
+        public string? Name_currency { get; set; }
 
         /// <summary>
-        /// Balance - количество средств в кошельке
+        /// количество средств в кошельке
         /// </summary>
         public double Balance { get; set; }
 
