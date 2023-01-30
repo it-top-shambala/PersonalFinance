@@ -8,7 +8,7 @@ namespace PersonalFinance.Lib.Models
         /// <summary>
         /// идентификатор категории оперции
         /// </summary>
-        public int Category_id { get; set; }
+        public int CategoryId { get; set; }
 
         /// <summary>
         /// имя категории

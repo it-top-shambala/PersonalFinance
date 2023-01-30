@@ -8,7 +8,7 @@ namespace PersonalFinance.Lib.Models
         /// <summary>
         ///  идентификатор кошелька
         /// </summary>
-        public int Wallet_id { get; set; }
+        public int WalletId { get; set; }
 
         /// <summary>
         ///  имя кошелька
@@ -18,7 +18,7 @@ namespace PersonalFinance.Lib.Models
         /// <summary>
         /// имя категории операции
         /// </summary>
-        public string? Name_currency { get; set; }
+        public string? CurrencyName { get; set; }
 
         /// <summary>
         /// количество средств в кошельке

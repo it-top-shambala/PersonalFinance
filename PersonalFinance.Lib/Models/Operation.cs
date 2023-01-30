@@ -8,12 +8,12 @@ namespace PersonalFinance.Lib.Models
         /// <summary>
         /// идентификатор операции
         /// </summary>
-        public int Operation_id { get; set; }
+        public int OperationId { get; set; }
 
         /// <summary>
         /// идентификатор кошелька
         /// </summary>
-        public int Wallet_id { get; set; }
+        public int WalletId { get; set; }
 
         /// <summary>
         /// время проведения операции
@@ -23,7 +23,7 @@ namespace PersonalFinance.Lib.Models
         /// <summary>
         /// имя категории операции
         /// </summary>
-        public string? Name_category { get; set; }
+        public string? CategoryName { get; set; }
 
         /// <summary>
         /// сумма операции
