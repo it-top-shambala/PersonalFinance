@@ -8,7 +8,7 @@ namespace PersonalFinance.Lib.Models
         /// <summary>
         ///  идентификатор валюты
         /// </summary>
-        public int CurrancyId { get; set; }
+        public int CurrencyId { get; set; }
 
         /// <summary>
         /// имя валюты
