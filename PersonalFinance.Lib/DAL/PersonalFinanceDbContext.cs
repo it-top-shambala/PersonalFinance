@@ -94,17 +94,17 @@ namespace PersonalFinance.Lib.DAL
         /// <summary>
         /// Методы удаления данных из бд
         /// </summary>
-        public void DeleteWallet(int id)
+        public int DeleteWallet(int id)
         {
             using var connection = new SqlConnection(connectionString);
             var query = "DELETE FROM tab_wallets WHERE wallet_id= @id";
-            _ = connection.Execute(query, new { id });
+            return connection.Execute(query, new { id });
         }
-        public void DeleteCategory(int id)
+        public int DeleteCategory(int id)
         {
             using var connection = new SqlConnection(connectionString);
             var query = "DELETE FROM tab_categories WHERE category_id= @id";
-            _ = connection.Execute(query, new { id });
+            return connection.Execute(query, new { id });
         }
 
         /// <summary>

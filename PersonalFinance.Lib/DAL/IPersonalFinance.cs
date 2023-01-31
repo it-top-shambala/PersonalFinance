@@ -15,8 +15,8 @@ namespace PersonalFinance.Lib.DAL
         int CreateWallet(Wallet wallet);
         int CreateCategory(Category category);
 
-        void DeleteWallet(int id);
-        void DeleteCategory(int id);
+        int DeleteWallet(int id);
+        int DeleteCategory(int id);
 
         bool UpdateWallet(int id, string newName);
         bool UpdateCategoryg(int id, string newName);
