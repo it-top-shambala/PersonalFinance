@@ -29,7 +29,7 @@
         <StackPanel Grid.Row="0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Content="Добавить кошелёк" Margin="3,3,3,0" Command="{Binding TopPanel.CommandOpenCloseCreateWallet}" Cursor="Hand"/>
-                <Button Content="Добавить категорию доходов" Margin="3,3,3,0" Command="{Binding TopPanel.CommandOpenCloseCreateIncomeCategory}" Cursor="Hand"/>
+                <Button Content="Добавить категорию" Margin="3,3,3,0" Command="{Binding TopPanel.CommandOpenCloseCreateCategory}" Cursor="Hand"/>
                 <Button Content="Добавить категорию расходов" Margin="3,3,6,0" Command="{Binding TopPanel.CommandOpenCloseCreateExpenseCategory}" Cursor="Hand"/>
             </StackPanel>
 
@@ -65,20 +65,17 @@
                 <Button Content="Добавить" Command="{Binding TopPanel.CommandCreateWallet}" Cursor="Hand"/>
             </StackPanel>
 
-            <StackPanel Visibility="{Binding TopPanel.CreateIncomeCategory.IsVisible}" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
-                <TextBox Text="{Binding TopPanel.CreateIncomeCategory.Name, UpdateSourceTrigger=PropertyChanged}" Width="200" Margin="0,0,10,0"
-                    materialDesign:HintAssist.Hint="Название категории дохода"
+            <StackPanel Visibility="{Binding TopPanel.CreateCategory.IsVisible}" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                <TextBox Text="{Binding TopPanel.CreateCategory.Name, UpdateSourceTrigger=PropertyChanged}" Width="200" Margin="0,0,10,0"
+                    materialDesign:HintAssist.Hint="Название категории"
                     materialDesign:HintAssist.IsFloating="True"
                     materialDesign:TextFieldAssist.HasClearButton="True"/>
-                <Button Content="Добавить" Command="{Binding TopPanel.CommandCreateIncomeCategory}" Cursor="Hand"/>
-            </StackPanel>
+                <StackPanel>
+                    <RadioButton GroupName="Type" Content="Приход" IsChecked="{Binding TopPanel.CreateCategory.IsIncome}"/>
+                    <RadioButton GroupName="Type" Content="Расход" IsChecked="{Binding TopPanel.CreateCategory.IsExpence}"/>
+                </StackPanel>
 
-            <StackPanel Visibility="{Binding TopPanel.CreateExpenseCategory.IsVisible}" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
-                <TextBox Text="{Binding TopPanel.CreateExpenseCategory.Name, UpdateSourceTrigger=PropertyChanged}" Width="200" Margin="0,0,10,0"
-                    materialDesign:HintAssist.Hint="Название категории расхода"
-                    materialDesign:HintAssist.IsFloating="True"
-                    materialDesign:TextFieldAssist.HasClearButton="True"/>
-                <Button Content="Добавить" Command="{Binding TopPanel.CommandCreateExpenseCategory}" Cursor="Hand"/>
+                <Button Content="Добавить" Command="{Binding TopPanel.CommandCreateCategory}" Margin="10,0,0,0" Cursor="Hand"/>
             </StackPanel>
         </StackPanel>
 
@@ -90,7 +87,7 @@
             </Grid.ColumnDefinitions>
 
             <ScrollViewer Grid.Column="0">
-                <ListBox ItemsSource="{Binding Wallets}">
+                <ListBox ItemsSource="{Binding Data.Wallets}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border Height="144" Width="200" BorderBrush="#FF673AB7" BorderThickness="1">
@@ -109,7 +106,7 @@
                                                 <DropShadowEffect Color="#FF673AB7" Direction="-30" BlurRadius="-3" ShadowDepth="2" />
                                             </TextBlock.Effect>
                                         </TextBlock>
-                                        <TextBlock Text="{Binding IdCurrancy}" Foreground="White" FontSize="25" HorizontalAlignment="Center" Margin="20,0,0,0">
+                                        <TextBlock Text="{Binding CurrencyName}" Foreground="White" FontSize="25" HorizontalAlignment="Center" Margin="20,0,0,0">
                                             <TextBlock.Effect>
                                                 <DropShadowEffect Color="#FF673AB7" Direction="-30" BlurRadius="-3" ShadowDepth="2" />
                                             </TextBlock.Effect>

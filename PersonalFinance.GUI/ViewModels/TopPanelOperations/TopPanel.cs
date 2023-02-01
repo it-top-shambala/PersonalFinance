@@ -8,13 +8,9 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
         public MyCommand CommandOpenCloseCreateWallet { get; }
         public MyCommand CommandCreateWallet { get; }
 
-        public OperationCreateIncomeCategory CreateIncomeCategory { get; set; }
-        public MyCommand CommandOpenCloseCreateIncomeCategory { get; }
-        public MyCommand CommandCreateIncomeCategory { get; }
-
-        public OperationCreateExpenseCategory CreateExpenseCategory { get; set; }
-        public MyCommand CommandOpenCloseCreateExpenseCategory { get; }
-        public MyCommand CommandCreateExpenseCategory { get; }
+        public OperationCreateCategory CreateCategory { get; set; }
+        public MyCommand CommandOpenCloseCreateCategory { get; }
+        public MyCommand CommandCreateCategory { get; }
 
         private int _height;
         public int Height
@@ -28,8 +24,7 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
             CreateWallet = new(() => { CommandCreateWallet?.OnCanExecuteChanged(); });
             CommandOpenCloseCreateWallet = new(_ =>
             {
-                CreateIncomeCategory?.Hide();
-                CreateExpenseCategory?.Hide();
+                CreateCategory?.Hide();
                 Height = CreateWallet.OpenClose();
             }, _ => true);
             CommandCreateWallet = new(_ =>
@@ -38,31 +33,16 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
             }, _ => CreateWallet.RefreshStates());
 
 
-            CreateIncomeCategory = new(() => { CommandCreateIncomeCategory?.OnCanExecuteChanged(); });
-            CommandOpenCloseCreateIncomeCategory = new(_ =>
+            CreateCategory = new(() => { CommandCreateCategory?.OnCanExecuteChanged(); });
+            CommandOpenCloseCreateCategory = new(_ =>
             {
-                CreateExpenseCategory?.Hide();
                 CreateWallet?.Hide();
-                Height = CreateIncomeCategory.OpenClose();
+                Height = CreateCategory.OpenClose();
             }, _ => true);
-            CommandCreateIncomeCategory = new(_ =>
+            CommandCreateCategory = new(_ =>
             {
-                CreateIncomeCategory.Create();
-            }, _ => CreateIncomeCategory.RefreshStates());
-
-
-            CreateExpenseCategory = new(() => { CommandCreateExpenseCategory?.OnCanExecuteChanged(); });
-            CommandOpenCloseCreateExpenseCategory = new(_ =>
-            {
-                CreateIncomeCategory?.Hide();
-                CreateWallet?.Hide();
-                Height = CreateExpenseCategory.OpenClose();
-            }, _ => true);
-            CommandCreateExpenseCategory = new(_ =>
-            {
-                CreateExpenseCategory.Create();
-            }, _ => CreateExpenseCategory.RefreshStates());
-
+                CreateCategory.Create();
+            }, _ => CreateCategory.RefreshStates());
 
             Height = 47;
         }
