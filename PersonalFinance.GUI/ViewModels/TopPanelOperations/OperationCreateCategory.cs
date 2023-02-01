@@ -1,5 +1,4 @@
 using System;
-using PersonalFinance.Lib.Models;
 
 namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
 {
@@ -8,29 +7,18 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
         public bool IsIncome { get; set; }
         public bool IsExpense { get; set; }
 
-        private readonly Action<Category> _addCategoryIncome;
-        private readonly Action<Category> _addCategoryExpense;
+        private readonly Action<string, bool> _addCategory;
 
-        public OperationCreateCategory(Action action, Action<Category> addCategoryIncome, Action<Category> addCategoryExpense) : base(action)
+        public OperationCreateCategory(Action action, Action<string, bool> addCategory) : base(action)
         {
             IsIncome = true;
             IsExpense = false;
-            _addCategoryIncome = addCategoryIncome;
-            _addCategoryExpense = addCategoryExpense;
+            _addCategory = addCategory;
         }
 
         public override void Create()
         {
-            var type = IsIncome;
-            //var newCategory = Financier.CreateCategory(Name, type);
-            //if (type)
-            //{
-            //    _addCategoryIncome.Invoke(newCategory);
-            //}
-            //else
-            //{
-            //    _addCategoryExpense.Invoke(newCategory);
-            //}
+            _addCategory.Invoke(Name!, IsIncome);
             Clear();
         }
     }

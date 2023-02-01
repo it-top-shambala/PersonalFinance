@@ -1,14 +1,12 @@
 using System;
 using System.Collections.Generic;
-using Microsoft.VisualBasic;
-using PersonalFinance.GUI.Models;
 using PersonalFinance.Lib.Models;
 
 namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
 {
     public class OperationCreateWallet : OperationAbstract
     {
-        private Action<MyWallet> _addWallet;
+        private readonly Action<string, Currency, double, string> _addWallet;
 
         private string? _sum;
         public string? Sum
@@ -53,7 +51,7 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
             }
         }
 
-        public OperationCreateWallet(Action action, Action<MyWallet> addWallet) : base(action)
+        public OperationCreateWallet(Action action, Action<string, Currency, double, string> addWallet) : base(action)
         {
             InitImageSources();
             _addWallet = addWallet;
@@ -69,11 +67,9 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
 
         public override void Create()
         {
-            //var newWallet = new MyWallet(Financier.CreateWallet(Name, SelectedCurrency, Sum));
-            //newWallet.Background = SelectedImage.Path;
-            //WalletBackgroundSaver.Save(newWallet.WalletId, SelectedImage.Path!);
-            //_addWallet.Invoke(newWallet);
-            //Clear();
+            var sum = Sum == string.Empty ? 0 : double.Parse(Sum!, System.Globalization.CultureInfo.InvariantCulture);
+            _addWallet.Invoke(Name!, SelectedCurrency!, sum, SelectedImage!.Path!);
+            Clear();
         }
 
         public override bool RefreshStates()

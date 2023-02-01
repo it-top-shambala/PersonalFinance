@@ -11,7 +11,7 @@ namespace PersonalFinance.GUI.ViewModels
         public MainWindowViewModel()
         {
             Data = new();
-            TopPanel = new(Data.AddCategoryIncome, Data.AddCategoryExpense, Data.AddWallet);
+            TopPanel = new(Data.AddCategory, Data.AddWallet);
         }
     }
 }
