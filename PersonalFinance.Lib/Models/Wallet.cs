@@ -3,7 +3,7 @@ namespace PersonalFinance.Lib.Models
     /// <summary>
     /// Класс Кошелек
     /// </summary>
-    public class Wallets
+    public class Wallet
     {
         /// <summary>
         ///  идентификатор кошелька
