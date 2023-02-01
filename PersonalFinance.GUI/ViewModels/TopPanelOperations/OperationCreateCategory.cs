@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.Serialization;
 using PersonalFinance.Lib.Models;
 
 namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
@@ -22,7 +21,6 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
 
         public override void Create()
         {
-            Clear();
             var type = IsIncome;
             //var newCategory = Financier.CreateCategory(Name, type);
             //if (type)
@@ -33,6 +31,7 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
             //{
             //    _addCategoryExpense.Invoke(newCategory);
             //}
+            Clear();
         }
     }
 }

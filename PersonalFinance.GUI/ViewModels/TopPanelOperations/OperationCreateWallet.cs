@@ -1,11 +1,15 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.VisualBasic;
+using PersonalFinance.GUI.Models;
 using PersonalFinance.Lib.Models;
 
 namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
 {
     public class OperationCreateWallet : OperationAbstract
     {
+        private Action<MyWallet> _addWallet;
+
         private string? _sum;
         public string? Sum
         {
@@ -34,8 +38,6 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
             }
         }
 
-        public List<Currency> Currencies { get; set; }
-
         public List<ImageSource>? ImageSources { get; set; }
 
         private ImageSource? _selectedImage;
@@ -51,10 +53,10 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
             }
         }
 
-        public OperationCreateWallet(Action action) : base(action)
+        public OperationCreateWallet(Action action, Action<MyWallet> addWallet) : base(action)
         {
-            Currencies = new List<Currency>(); //используем метод получения валют
             InitImageSources();
+            _addWallet = addWallet;
         }
 
         protected override void Clear()
@@ -67,10 +69,11 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
 
         public override void Create()
         {
-            Clear();
-            //используем метод для создания(добавления) нового кошелька
-            //...CreateWallet(Name, Sum, SelectedCurrency.Id)
-            //сохранить привязку фона к кошельку (наследование от Wallet) 
+            //var newWallet = new MyWallet(Financier.CreateWallet(Name, SelectedCurrency, Sum));
+            //newWallet.Background = SelectedImage.Path;
+            //WalletBackgroundSaver.Save(newWallet.WalletId, SelectedImage.Path!);
+            //_addWallet.Invoke(newWallet);
+            //Clear();
         }
 
         public override bool RefreshStates()

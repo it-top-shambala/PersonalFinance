@@ -1,4 +1,5 @@
 using System;
+using PersonalFinance.GUI.Models;
 using PersonalFinance.GUI.ViewModels.Commands;
 using PersonalFinance.Lib.Models;
 
@@ -21,9 +22,9 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
             set => SetField(ref _height, value);
         }
 
-        public TopPanel(Action<Category> addCategoryIncome, Action<Category> addCategoryExpense)
+        public TopPanel(Action<Category> addCategoryIncome, Action<Category> addCategoryExpense, Action<MyWallet> addWallet)
         {
-            CreateWallet = new(() => { CommandCreateWallet?.OnCanExecuteChanged(); });
+            CreateWallet = new(() => { CommandCreateWallet?.OnCanExecuteChanged(); }, addWallet);
             CommandOpenCloseCreateWallet = new(_ =>
             {
                 CreateCategory?.Hide();
