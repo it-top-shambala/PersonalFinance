@@ -29,8 +29,9 @@
         <StackPanel Grid.Row="0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Content="Добавить кошелёк" Margin="3,3,3,0" Command="{Binding TopPanel.CommandOpenCloseCreateWallet}" Cursor="Hand"/>
+                <Button Content="Ред. кошелёк" Margin="3,3,3,0" Cursor="Hand"/>
                 <Button Content="Добавить категорию" Margin="3,3,3,0" Command="{Binding TopPanel.CommandOpenCloseCreateCategory}" Cursor="Hand"/>
-                <Button Content="Добавить категорию расходов" Margin="3,3,6,0" Command="{Binding TopPanel.CommandOpenCloseCreateExpenseCategory}" Cursor="Hand"/>
+                <Button Content="Ред. категорию" Margin="3,3,6,0" Cursor="Hand"/>
             </StackPanel>
 
             <StackPanel Visibility="{Binding TopPanel.CreateWallet.IsVisible}" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0" Height="70">
@@ -72,7 +73,7 @@
                     materialDesign:TextFieldAssist.HasClearButton="True"/>
                 <StackPanel>
                     <RadioButton GroupName="Type" Content="Приход" IsChecked="{Binding TopPanel.CreateCategory.IsIncome}"/>
-                    <RadioButton GroupName="Type" Content="Расход" IsChecked="{Binding TopPanel.CreateCategory.IsExpence}"/>
+                    <RadioButton GroupName="Type" Content="Расход" IsChecked="{Binding TopPanel.CreateCategory.IsExpense}"/>
                 </StackPanel>
 
                 <Button Content="Добавить" Command="{Binding TopPanel.CommandCreateCategory}" Margin="10,0,0,0" Cursor="Hand"/>

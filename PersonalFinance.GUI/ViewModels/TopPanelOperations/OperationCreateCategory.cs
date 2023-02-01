@@ -1,25 +1,38 @@
 using System;
+using System.Runtime.Serialization;
+using PersonalFinance.Lib.Models;
 
 namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
 {
     public class OperationCreateCategory : OperationAbstract
     {
         public bool IsIncome { get; set; }
-        public bool IsExpence { get; set; }
+        public bool IsExpense { get; set; }
 
-        public OperationCreateCategory(Action action) : base(action)
+        private readonly Action<Category> _addCategoryIncome;
+        private readonly Action<Category> _addCategoryExpense;
+
+        public OperationCreateCategory(Action action, Action<Category> addCategoryIncome, Action<Category> addCategoryExpense) : base(action)
         {
             IsIncome = true;
-            IsExpence = false;
+            IsExpense = false;
+            _addCategoryIncome = addCategoryIncome;
+            _addCategoryExpense = addCategoryExpense;
         }
 
         public override void Create()
         {
             Clear();
             var type = IsIncome;
-            //Financier.CreateCategory(Name, type);
-
-            //Category CreateCategory(string name, bool type)
+            //var newCategory = Financier.CreateCategory(Name, type);
+            //if (type)
+            //{
+            //    _addCategoryIncome.Invoke(newCategory);
+            //}
+            //else
+            //{
+            //    _addCategoryExpense.Invoke(newCategory);
+            //}
         }
     }
 }
