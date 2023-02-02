@@ -36,10 +36,7 @@ namespace PersonalFinance.GUI.ViewModels
             //Currencies = Financier.GetAllCurrencies().ToList();
 
             //для теста
-            Wallets = new ObservableCollection<MyWallet> { new MyWallet
-            {
-                WalletId = 1, Balance = 1000000, CurrencyName = "USD", Name = "Кошелёк Барсика", Background = "Assets/Backgrounds/2.jpg"
-            } };
+            Wallets = new ObservableCollection<MyWallet>();
 
             CategoriesIncome = new ObservableCollection<Category>() { new Category { CategoryId = 1, Name = "Зарплата", Type = true } };
             CategoriesExpense = new ObservableCollection<Category>() { new Category { CategoryId = 2, Name = "На пивко", Type = false } };
@@ -56,13 +53,14 @@ namespace PersonalFinance.GUI.ViewModels
             //для теста
             var newWallet = new MyWallet
             {
-                WalletId = Wallets[^1].WalletId + 1,
+                WalletId = Wallets.Count == 0 ? 1 : Wallets[^1].WalletId + 1,
                 Name = name,
                 Balance = sum,
                 CurrencyName = currency.Name,
                 Background = background
             };
             Wallets.Add(newWallet);
+            WalletBackgroundSaver.Save(newWallet.WalletId, background);
         }
 
         public void EditWallet(MyWallet wallet, string newName)

@@ -14,9 +14,10 @@ namespace PersonalFinance.GUI.Models
     {
         public static void Save(int walletId, string path)
         {
-            var items = JsonSerializer.Deserialize<List<WalletBackground>>("backgrounds.json");
-            items!.Add(new WalletBackground { Id = walletId, Path = path });
-            var file = JsonSerializer.Serialize(items);
+            var fromFile = File.ReadAllText("backgrounds.json");
+            var list = JsonSerializer.Deserialize<List<WalletBackground>>(fromFile);
+            list!.Add(new WalletBackground { Id = walletId, Path = path });
+            var file = JsonSerializer.Serialize(list);
             File.WriteAllText("backgrounds.json", file);
         }
 

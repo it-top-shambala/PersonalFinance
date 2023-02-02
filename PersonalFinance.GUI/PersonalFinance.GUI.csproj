@@ -50,10 +50,4 @@
       </Resource>
     </ItemGroup>
 
-    <ItemGroup>
-      <None Update="backgrounds.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
-
 </Project>
