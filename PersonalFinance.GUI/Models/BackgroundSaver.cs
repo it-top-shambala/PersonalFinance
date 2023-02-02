@@ -23,7 +23,8 @@ namespace PersonalFinance.GUI.Models
 
         public static List<WalletBackground> Load()
         {
-            return JsonSerializer.Deserialize<List<WalletBackground>>("backgrounds.json")!;
+            var fromFile = File.ReadAllText("backgrounds.json");
+            return JsonSerializer.Deserialize<List<WalletBackground>>(fromFile)!;
         }
     }
 }
