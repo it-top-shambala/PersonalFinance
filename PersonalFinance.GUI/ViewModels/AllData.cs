@@ -52,6 +52,17 @@ namespace PersonalFinance.GUI.ViewModels
             //newWallet.Background = background;
             //WalletBackgroundSaver.Save(newWallet.WalletId, background);
             //Wallets.Add(newWallet);
+
+            //для теста
+            var newWallet = new MyWallet
+            {
+                WalletId = Wallets[^1].WalletId + 1,
+                Name = name,
+                Balance = sum,
+                CurrencyName = currency.Name,
+                Background = background
+            };
+            Wallets.Add(newWallet);
         }
 
         public void EditWallet(MyWallet wallet, string newName)
