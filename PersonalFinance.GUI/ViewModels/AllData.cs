@@ -46,6 +46,33 @@ namespace PersonalFinance.GUI.ViewModels
 
             Currencies = new List<Currency> { new Currency { CurrencyId = 1, Code = 111, Name = "USD" } };
         }
+        public void AddWallet(string name, Currency currency, double sum, string background)
+        {
+            //var newWallet = new MyWallet(Financier.CreateWallet(name, currency, sum));
+            //newWallet.Background = background;
+            //WalletBackgroundSaver.Save(newWallet.WalletId, background);
+            //Wallets.Add(newWallet);
+        }
+
+        public void EditWallet(MyWallet wallet, string newName)
+        {
+            //var updatedWallet = new MyWallet(Financier.EditWalletName(wallet.WalletId, newName));
+            //updatedWallet.Background = wallet.Background;
+            //var index = Wallets.IndexOf(wallet);
+            //Wallets[index] = updatedWallet;
+
+            //для теста
+            var newWallet = new MyWallet
+            {
+                WalletId = wallet.WalletId,
+                Name = newName,
+                Balance = wallet.Balance,
+                CurrencyName = wallet.CurrencyName,
+                Background = wallet.Background
+            };
+            var index = Wallets.IndexOf(wallet);
+            Wallets[index] = newWallet;
+        }
 
         public void AddCategory(string name, bool type)
         {
@@ -60,27 +87,19 @@ namespace PersonalFinance.GUI.ViewModels
             //}
         }
 
-        public void AddWallet(string name, Currency currency, double sum, string background)
-        {
-            //var newWallet = new MyWallet(Financier.CreateWallet(name, currency, sum));
-            //newWallet.Background = background;
-            //WalletBackgroundSaver.Save(newWallet.WalletId, background);
-            //Wallets.Add(newWallet);
-        }
-
-        public void EditCategory(Category income, Category expense, string name)
+        public void EditCategory(Category income, Category expense, string newName)
         {
             if (income is not null)
             {
                 //Financier.EditCategoryName(income.CategoryId, name);
-                var category = new Category { CategoryId = income.CategoryId, Name = name, Type = income.Type };
+                var category = new Category { CategoryId = income.CategoryId, Name = newName, Type = income.Type };
                 var index = CategoriesIncome.IndexOf(income);
                 CategoriesIncome[index] = category;
             }
             else
             {
                 //Financier.EditCategoryName(expense.CategoryId, name);
-                var category = new Category { CategoryId = expense.CategoryId, Name = name, Type = expense.Type };
+                var category = new Category { CategoryId = expense.CategoryId, Name = newName, Type = expense.Type };
                 var index = CategoriesExpense.IndexOf(expense);
                 CategoriesExpense[index] = category;
             }
