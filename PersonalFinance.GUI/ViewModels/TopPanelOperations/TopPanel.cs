@@ -14,6 +14,10 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
         public MyCommand CommandOpenCloseCreateCategory { get; }
         public MyCommand CommandCreateCategory { get; }
 
+        public OperationEditCategory EditCategory { get; set; }
+        public MyCommand CommandOpenCloseEditCategory { get; }
+        public MyCommand CommandEditCategory { get; }
+
         private int _height;
         public int Height
         {
@@ -21,12 +25,13 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
             set => SetField(ref _height, value);
         }
 
-        public TopPanel(Action<string, bool> addCategory, Action<string, Currency, double, string> addWallet)
+        public TopPanel(Action<string, bool> addCategory, Action<string, Currency, double, string> addWallet, Action<Category, Category, string> editCategory)
         {
             CreateWallet = new(() => { CommandCreateWallet?.OnCanExecuteChanged(); }, addWallet);
             CommandOpenCloseCreateWallet = new(_ =>
             {
                 CreateCategory?.Hide();
+                EditCategory?.Hide();
                 Height = CreateWallet.OpenClose();
             }, _ => true);
             CommandCreateWallet = new(_ =>
@@ -39,12 +44,26 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
             CommandOpenCloseCreateCategory = new(_ =>
             {
                 CreateWallet?.Hide();
+                EditCategory?.Hide();
                 Height = CreateCategory.OpenClose();
             }, _ => true);
             CommandCreateCategory = new(_ =>
             {
                 CreateCategory.Create();
             }, _ => CreateCategory.RefreshStates());
+
+
+            EditCategory = new(() => { CommandEditCategory?.OnCanExecuteChanged(); }, editCategory);
+            CommandOpenCloseEditCategory = new(_ =>
+            {
+                CreateWallet?.Hide();
+                CreateCategory?.Hide();
+                Height = EditCategory.OpenClose();
+            }, _ => true);
+            CommandEditCategory = new(_ =>
+            {
+                EditCategory.Create();
+            }, _ => EditCategory.RefreshStates());
 
             Height = 47;
         }

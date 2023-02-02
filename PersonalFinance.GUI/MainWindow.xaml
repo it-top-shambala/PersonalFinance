@@ -31,7 +31,7 @@
                 <Button Content="Добавить кошелёк" Margin="3,3,3,0" Command="{Binding TopPanel.CommandOpenCloseCreateWallet}" Cursor="Hand"/>
                 <Button Content="Ред. кошелёк" Margin="3,3,3,0" Cursor="Hand"/>
                 <Button Content="Добавить категорию" Margin="3,3,3,0" Command="{Binding TopPanel.CommandOpenCloseCreateCategory}" Cursor="Hand"/>
-                <Button Content="Ред. категорию" Margin="3,3,6,0" Cursor="Hand"/>
+                <Button Content="Ред. категорию" Margin="3,3,6,0" Command="{Binding TopPanel.CommandOpenCloseEditCategory}"  Cursor="Hand"/>
             </StackPanel>
 
             <StackPanel Visibility="{Binding TopPanel.CreateWallet.IsVisible}" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0" Height="70">
@@ -77,6 +77,37 @@
                 </StackPanel>
 
                 <Button Content="Добавить" Command="{Binding TopPanel.CommandCreateCategory}" Margin="10,0,0,0" Cursor="Hand"/>
+            </StackPanel>
+
+            <StackPanel Visibility="{Binding TopPanel.EditCategory.IsVisible}" Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel>
+                    <ComboBox ItemsSource="{Binding Data.CategoriesIncome}" SelectedItem="{Binding TopPanel.EditCategory.SelectedCategoryIncome, UpdateSourceTrigger=PropertyChanged}" 
+                          materialDesign:HintAssist.Hint="Категория прихода"
+                          materialDesign:HintAssist.IsFloating="True"
+                          Width="200" >
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <ComboBox ItemsSource="{Binding Data.CategoriesExpense}" SelectedItem="{Binding TopPanel.EditCategory.SelectedCategoryExpense, UpdateSourceTrigger=PropertyChanged}" 
+                          materialDesign:HintAssist.Hint="Категория расхода"
+                          materialDesign:HintAssist.IsFloating="True"
+                          Width="200">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+                <TextBox Text="{Binding TopPanel.EditCategory.Name, UpdateSourceTrigger=PropertyChanged}" Width="200" Height="38" Margin="10,0,0,0" 
+                    materialDesign:HintAssist.Hint="Новое название"
+                    materialDesign:HintAssist.IsFloating="True"
+                    materialDesign:TextFieldAssist.HasClearButton="True"/>
+
+                <Button Content="Сохранить" Command="{Binding TopPanel.CommandEditCategory}" Margin="10,0,0,0" Cursor="Hand"/>
             </StackPanel>
         </StackPanel>
 
