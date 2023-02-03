@@ -160,7 +160,7 @@ namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
         public bool CanMakeOperaton()
         {
             return (SelectedWallet is not null && SelectedCategoryIncome is not null && SumIncome is not null) ||
-                   (SelectedWallet is not null && SelectedCategoryExpense is not null && SumExpense is not null);
+                   (SelectedWallet is not null && SelectedCategoryExpense is not null && SumExpense is not null && (SelectedWallet.Balance - double.Parse(SumExpense!, System.Globalization.CultureInfo.InvariantCulture) >= 0));
         }
 
         private void Clear()
