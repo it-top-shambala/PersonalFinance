@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using PersonalFinance.GUI.Models;
 using PersonalFinance.Lib.Models;
 
 namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
@@ -14,8 +15,8 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
             get => _sum;
             set
             {
-                RemoveLettersOrSymbols(ref value!);
-                Cut(ref value!);
+                SumFormatter.RemoveLettersOrSymbols(ref value!);
+                SumFormatter.Cut(ref value!);
                 if (SetField(ref _sum, value))
                 {
                     RefreshState?.Invoke();
@@ -75,44 +76,6 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
         public override bool RefreshStates()
         {
             return !string.IsNullOrWhiteSpace(Name) && SelectedCurrency is not null && !string.IsNullOrWhiteSpace(SelectedImage?.Path);
-        }
-
-        private static void RemoveLettersOrSymbols(ref string str)
-        {
-            if (!string.IsNullOrEmpty(str))
-            {
-                if (str[0] is ',' or '0')
-                {
-                    str = str.Remove(0, 1);
-                }
-
-                for (var i = 0; i < str.Length; i++)
-                {
-                    if (!char.IsDigit(str[i]) && str[i] != ',')
-                    {
-                        str = str.Remove(i, 1);
-                    }
-                }
-
-                if (str.Contains(','))
-                {
-                    for (var i = str.IndexOf(',') + 1; i < str.Length; i++)
-                    {
-                        if (str[i] == ',')
-                        {
-                            str = str.Remove(i, 1);
-                        }
-                    }
-                }
-            }
-        }
-
-        private static void Cut(ref string str)
-        {
-            if (str.Contains(',') && str.IndexOf(',') + 3 == str.Length - 1)
-            {
-                str = str.Remove(str.IndexOf(',') + 3);
-            }
         }
 
         private void InitImageSources()

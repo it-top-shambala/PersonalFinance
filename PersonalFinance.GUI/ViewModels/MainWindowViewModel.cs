@@ -3,7 +3,7 @@ using PersonalFinance.GUI.ViewModels.TopPanelOperations;
 
 namespace PersonalFinance.GUI.ViewModels
 {
-    public class MainWindowViewModel : Notifier
+    public class MainWindowViewModel
     {
         public AllData Data { get; set; }
 
@@ -15,7 +15,7 @@ namespace PersonalFinance.GUI.ViewModels
         {
             Data = new();
             TopPanel = new(Data.AddWallet, Data.EditWallet, Data.AddCategory, Data.EditCategory);
-            MainPanel = new(Data.ShowAllOperations, Data.ShowFilteredOperations);
+            MainPanel = new(Data.ShowAllOperations, Data.ShowFilteredOperations, Data.MakeOperation);
         }
     }
 }

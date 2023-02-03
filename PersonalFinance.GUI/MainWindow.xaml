@@ -169,53 +169,67 @@
                 </ListBox>
             </ScrollViewer>
 
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="4*"/>
-                </Grid.RowDefinitions>
+            <ScrollViewer Grid.Column="1">
+                <DataGrid ItemsSource="{Binding Data.Operations, UpdateSourceTrigger=PropertyChanged}"
+                              AutoGenerateColumns="False" 
+                              CanUserAddRows="False" 
+                              CanUserDeleteRows="False"
+                              SelectedItem="{Binding MainPanel.OperationMaker.SelectedWallet}">
+                    <DataGrid.Columns>
+                        <materialDesign:DataGridTextColumn Header="Сумма операции" Binding="{Binding Summa}" Width="Auto" IsReadOnly="True"/>
+                        <materialDesign:DataGridTextColumn Header="Категория" Binding="{Binding CategoryName}" Width="Auto" IsReadOnly="True"/>
+                        <materialDesign:DataGridTextColumn Header="Дата" Binding="{Binding DateTime}" Width="Auto" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
 
-                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <StackPanel>
-                        <ComboBox ItemsSource="{Binding Data.CategoriesIncome}" SelectedItem="{Binding MainPanel.OperationViewer.SelectedCategoryIncome, UpdateSourceTrigger=PropertyChanged}" 
+            </ScrollViewer>
+            <StackPanel Grid.Column="2" HorizontalAlignment="Center" Margin="10">
+                <ComboBox ItemsSource="{Binding Data.CategoriesIncome}" SelectedItem="{Binding MainPanel.OperationMaker.SelectedCategoryIncome, UpdateSourceTrigger=PropertyChanged}" 
                           materialDesign:HintAssist.Hint="Категория прихода"
                           materialDesign:HintAssist.IsFloating="True"
                           Width="200" >
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Name}"/>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-                        <ComboBox ItemsSource="{Binding Data.CategoriesExpense}" SelectedItem="{Binding MainPanel.OperationViewer.SelectedCategoryExpense, UpdateSourceTrigger=PropertyChanged}" 
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <TextBox Text="{Binding MainPanel.OperationMaker.SumIncome, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="200" Margin="0,0,10,0" VerticalAlignment="Bottom"
+                    materialDesign:HintAssist.Hint="Введите сумму"
+                    materialDesign:HintAssist.IsFloating="True"
+                    materialDesign:TextFieldAssist.HasClearButton="True"/>
+                <Button Content="Пополнить" Command="{Binding MainPanel.CommandMakeOperation}" Margin="10" Cursor="Hand"/>
+
+                <ComboBox ItemsSource="{Binding Data.CategoriesExpense}" SelectedItem="{Binding MainPanel.OperationMaker.SelectedCategoryExpense, UpdateSourceTrigger=PropertyChanged}" 
                           materialDesign:HintAssist.Hint="Категория расхода"
                           materialDesign:HintAssist.IsFloating="True"
-                          Width="200">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Name}"/>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-                    </StackPanel>
-                    
-                    <Button Content="Фильтровать" Command="{Binding MainPanel.CommandFilterByCategory}" Margin="20,0,0,30" Cursor="Hand"/>
-                </StackPanel>
+                          Width="200"
+                          Margin="0,30,0,0">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <TextBox Text="{Binding MainPanel.OperationMaker.SumExpense, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="200" Margin="0,0,10,0" VerticalAlignment="Bottom"
+                    materialDesign:HintAssist.Hint="Введите сумму"
+                    materialDesign:HintAssist.IsFloating="True"
+                    materialDesign:TextFieldAssist.HasClearButton="True"/>
+                <Button Content="Потратить" Command="{Binding MainPanel.CommandMakeOperation}" Margin="10" Cursor="Hand"/>
 
-                <ScrollViewer Grid.Row="1">
-                    <DataGrid>
-                        
-                    </DataGrid>
-                </ScrollViewer>
-
-
-
-            </Grid>
-
-
-
-
-            
+                <ComboBox ItemsSource="{Binding Data.AllCategories}" SelectedItem="{Binding MainPanel.OperationMaker.FilterCategory, UpdateSourceTrigger=PropertyChanged}" 
+                          materialDesign:HintAssist.Hint="Выберите категорию"
+                          materialDesign:HintAssist.IsFloating="True"
+                          Width="200"
+                          Margin="0,30,0,0">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Button Content="Фильтровать" Command="{Binding MainPanel.CommandFilterByCategory}" Margin="10" Cursor="Hand"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

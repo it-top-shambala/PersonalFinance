@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using PersonalFinance.GUI.Models;
 using PersonalFinance.Lib.Models;
 
@@ -11,6 +13,7 @@ namespace PersonalFinance.GUI.ViewModels
 
         public ObservableCollection<Category> CategoriesIncome { get; set; }
         public ObservableCollection<Category> CategoriesExpense { get; set; }
+        public List<Category>? AllCategories { get; set; }
 
         public List<Currency> Currencies { get; set; }
 
@@ -31,11 +34,12 @@ namespace PersonalFinance.GUI.ViewModels
 
             //используем методы получения категорий
             //var categories = Financier.GetAllCategories().ToList();
-            //CategoriesIncome = new ObservableCollection<Category>(categories.Income);
-            //CategoriesExpense = new ObservableCollection<Category>(categories.Expense);
 
+            //CategoriesIncome = new ObservableCollection<Category>(categories.income);
+            //CategoriesExpense = new ObservableCollection<Category>(categories.expense);
             //используем метод получения валют
             //Currencies = Financier.GetAllCurrencies().ToList();
+
 
             //для теста
             Wallets = new ObservableCollection<MyWallet>();
@@ -43,7 +47,11 @@ namespace PersonalFinance.GUI.ViewModels
             CategoriesIncome = new ObservableCollection<Category>() { new Category { CategoryId = 1, Name = "Зарплата", Type = true } };
             CategoriesExpense = new ObservableCollection<Category>() { new Category { CategoryId = 2, Name = "На пивко", Type = false } };
 
+            AllCategoriesInit();
+
             Currencies = new List<Currency> { new Currency { CurrencyId = 1, Code = 111, Name = "USD" } };
+
+            Operations = new() { new Operation { OperationId = 1, CategoryName = "На пивко", Summa = 2000, WalletId = 1, DateTime = DateTime.Now } };
         }
         public void AddWallet(string name, Currency currency, double sum, string background)
         {
@@ -96,6 +104,7 @@ namespace PersonalFinance.GUI.ViewModels
             //{
             //    CategoriesExpense.Add(newCategory);
             //}
+            AllCategoriesInit();
         }
 
         public void EditCategory(Category income, Category expense, string newName)
@@ -126,9 +135,28 @@ namespace PersonalFinance.GUI.ViewModels
             //Operations = new(Financier.GetFilteredWalletOperations(walletId, categoryName));
         }
 
-        public void MakeNewOperation()
+        public void MakeOperation(MyWallet wallet, int categoryId, double sum)
         {
+            //var result = Financier.MakeWalletOperation(wallet.WalletId, categoryId, sum);
+            //Operations.Add(result.operation);
+            //var updatedWallet = new MyWallet(result.wallet);
+            //updatedWallet.Background = wallet.Background;
+            //var index = Wallets.IndexOf(wallet);
+            //Wallets[index] = updatedWallet;
+        }
 
+        private void AllCategoriesInit()
+        {
+            var list = new List<Category>();
+            foreach (var c in CategoriesIncome)
+            {
+                list.Add(c);
+            }
+            foreach (var c in CategoriesExpense)
+            {
+                list.Add(c);
+            }
+            AllCategories = list.OrderBy(c => c.Name).ToList();
         }
     }
 }
