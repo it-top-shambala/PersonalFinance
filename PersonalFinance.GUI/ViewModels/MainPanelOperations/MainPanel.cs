@@ -12,7 +12,6 @@ namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
 
         public MyCommand CommandMakeOperation { get; }
 
-
         public MainPanel(Action<int> allOperations, Action<int, int> filteredOperations, Action<MyWallet, int, double> makeOperation)
         {
             OperationMaker = new(() => { CommandFilterByCategory?.OnCanExecuteChanged(); },
