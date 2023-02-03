@@ -132,7 +132,7 @@
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="235"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="3*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
@@ -169,8 +169,53 @@
                 </ListBox>
             </ScrollViewer>
 
-            
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="4*"/>
+                </Grid.RowDefinitions>
 
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel>
+                        <ComboBox ItemsSource="{Binding Data.CategoriesIncome}" SelectedItem="{Binding MainPanel.OperationViewer.SelectedCategoryIncome, UpdateSourceTrigger=PropertyChanged}" 
+                          materialDesign:HintAssist.Hint="Категория прихода"
+                          materialDesign:HintAssist.IsFloating="True"
+                          Width="200" >
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <ComboBox ItemsSource="{Binding Data.CategoriesExpense}" SelectedItem="{Binding MainPanel.OperationViewer.SelectedCategoryExpense, UpdateSourceTrigger=PropertyChanged}" 
+                          materialDesign:HintAssist.Hint="Категория расхода"
+                          materialDesign:HintAssist.IsFloating="True"
+                          Width="200">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                    
+                    <Button Content="Фильтровать" Command="{Binding MainPanel.CommandFilterByCategory}" Margin="20,0,0,30" Cursor="Hand"/>
+                </StackPanel>
+
+                <ScrollViewer Grid.Row="1">
+                    <DataGrid>
+                        
+                    </DataGrid>
+                </ScrollViewer>
+
+
+
+            </Grid>
+
+
+
+
+            
         </Grid>
     </Grid>
 </Window>

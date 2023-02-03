@@ -14,6 +14,8 @@ namespace PersonalFinance.GUI.ViewModels
 
         public List<Currency> Currencies { get; set; }
 
+        public ObservableCollection<Operation>? Operations { get; set; }
+
         public AllData()
         {
             //используем метод получения кошельков
@@ -112,6 +114,21 @@ namespace PersonalFinance.GUI.ViewModels
                 var index = CategoriesExpense.IndexOf(expense);
                 CategoriesExpense[index] = category;
             }
+        }
+
+        public void ShowAllOperations(int walletId)
+        {
+            //Operations = new(Financier.GetAllWalletOperations(walletId));
+        }
+
+        public void ShowFilteredOperations(int walletId, int categoryId)
+        {
+            //Operations = new(Financier.GetFilteredWalletOperations(walletId, categoryName));
+        }
+
+        public void MakeNewOperation()
+        {
+
         }
     }
 }
