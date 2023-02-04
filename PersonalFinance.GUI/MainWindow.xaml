@@ -216,7 +216,7 @@
                     materialDesign:TextFieldAssist.HasClearButton="True"/>
                 <Button Content="Потратить" Command="{Binding MainPanel.CommandMakeOperationExpense}" Margin="10" Cursor="Hand"/>
 
-                <ComboBox ItemsSource="{Binding Data.AllCategories}" SelectedItem="{Binding MainPanel.OperationMaker.FilterCategory, UpdateSourceTrigger=PropertyChanged}" 
+                <ComboBox ItemsSource="{Binding Data.AllCategories, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding MainPanel.OperationMaker.FilterCategory, UpdateSourceTrigger=PropertyChanged}" 
                           materialDesign:HintAssist.Hint="Выберите категорию"
                           materialDesign:HintAssist.IsFloating="True"
                           Width="200"

@@ -13,7 +13,7 @@ namespace PersonalFinance.GUI.ViewModels
 
         public ObservableCollection<Category> CategoriesIncome { get; set; }
         public ObservableCollection<Category> CategoriesExpense { get; set; }
-        public List<Category>? AllCategories { get; set; }
+        public ObservableCollection<Category>? AllCategories { get; set; }
 
         public List<Currency> Currencies { get; set; }
 
@@ -46,6 +46,8 @@ namespace PersonalFinance.GUI.ViewModels
 
             CategoriesIncome = new ObservableCollection<Category>() { new Category { CategoryId = 1, Name = "Зарплата", Type = true } };
             CategoriesExpense = new ObservableCollection<Category>() { new Category { CategoryId = 2, Name = "На пивко", Type = false } };
+
+            AllCategories = new();
 
             AllCategoriesInit();
 
@@ -123,6 +125,7 @@ namespace PersonalFinance.GUI.ViewModels
                 var index = CategoriesExpense.IndexOf(expense);
                 CategoriesExpense[index] = category;
             }
+            AllCategoriesInit();
         }
 
         public void ShowAllOperations(int walletId)
@@ -156,7 +159,13 @@ namespace PersonalFinance.GUI.ViewModels
             {
                 list.Add(c);
             }
-            AllCategories = list.OrderBy(c => c.Name).ToList();
+
+            AllCategories!.Clear();
+
+            foreach (var c in list.OrderBy(c => c.Name).ToList())
+            {
+                AllCategories.Add(c);
+            }
         }
     }
 }

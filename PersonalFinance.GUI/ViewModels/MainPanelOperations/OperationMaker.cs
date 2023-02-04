@@ -42,6 +42,7 @@ namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
                 {
                     SelectedCategoryExpense = null;
                     SumExpense = null;
+                    FilterCategory = null;
                 }
                 _canMakeOperationIncome.Invoke();
             }
@@ -64,6 +65,7 @@ namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
                 {
                     SelectedCategoryExpense = null;
                     SumExpense = null;
+                    FilterCategory = null;
                 }
                 _canMakeOperationIncome.Invoke();
             }
@@ -81,6 +83,7 @@ namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
                 {
                     SelectedCategoryIncome = null;
                     SumIncome = null;
+                    FilterCategory = null;
                 }
                 _canMakeOperationExpense.Invoke();
             }
@@ -103,6 +106,7 @@ namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
                 {
                     SelectedCategoryIncome = null;
                     SumIncome = null;
+                    FilterCategory = null;
                 }
                 _canMakeOperationExpense.Invoke();
             }
