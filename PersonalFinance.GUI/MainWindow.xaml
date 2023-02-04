@@ -137,7 +137,7 @@
             </Grid.ColumnDefinitions>
 
             <ScrollViewer Grid.Column="0">
-                <ListBox ItemsSource="{Binding Data.Wallets}">
+                <ListBox ItemsSource="{Binding Data.Wallets}" SelectedItem="{Binding MainPanel.OperationMaker.SelectedWallet}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border Height="144" Width="200" BorderBrush="#FF673AB7" BorderThickness="1">
@@ -173,8 +173,7 @@
                 <DataGrid ItemsSource="{Binding Data.Operations, UpdateSourceTrigger=PropertyChanged}"
                               AutoGenerateColumns="False" 
                               CanUserAddRows="False" 
-                              CanUserDeleteRows="False"
-                              SelectedItem="{Binding MainPanel.OperationMaker.SelectedWallet}">
+                              CanUserDeleteRows="False">
                     <DataGrid.Columns>
                         <materialDesign:DataGridTextColumn Header="Сумма операции" Binding="{Binding Summa}" Width="Auto" IsReadOnly="True"/>
                         <materialDesign:DataGridTextColumn Header="Категория" Binding="{Binding CategoryName}" Width="Auto" IsReadOnly="True"/>
@@ -198,7 +197,7 @@
                     materialDesign:HintAssist.Hint="Введите сумму"
                     materialDesign:HintAssist.IsFloating="True"
                     materialDesign:TextFieldAssist.HasClearButton="True"/>
-                <Button Content="Пополнить" Command="{Binding MainPanel.CommandMakeOperation}" Margin="10" Cursor="Hand"/>
+                <Button Content="Пополнить" Command="{Binding MainPanel.CommandMakeOperationIncome}" Margin="10" Cursor="Hand"/>
 
                 <ComboBox ItemsSource="{Binding Data.CategoriesExpense}" SelectedItem="{Binding MainPanel.OperationMaker.SelectedCategoryExpense, UpdateSourceTrigger=PropertyChanged}" 
                           materialDesign:HintAssist.Hint="Категория расхода"
@@ -215,7 +214,7 @@
                     materialDesign:HintAssist.Hint="Введите сумму"
                     materialDesign:HintAssist.IsFloating="True"
                     materialDesign:TextFieldAssist.HasClearButton="True"/>
-                <Button Content="Потратить" Command="{Binding MainPanel.CommandMakeOperation}" Margin="10" Cursor="Hand"/>
+                <Button Content="Потратить" Command="{Binding MainPanel.CommandMakeOperationExpense}" Margin="10" Cursor="Hand"/>
 
                 <ComboBox ItemsSource="{Binding Data.AllCategories}" SelectedItem="{Binding MainPanel.OperationMaker.FilterCategory, UpdateSourceTrigger=PropertyChanged}" 
                           materialDesign:HintAssist.Hint="Выберите категорию"

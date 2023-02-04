@@ -10,12 +10,15 @@ namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
 
         public MyCommand CommandFilterByCategory { get; }
 
-        public MyCommand CommandMakeOperation { get; }
+        public MyCommand CommandMakeOperationIncome { get; }
+
+        public MyCommand CommandMakeOperationExpense { get; }
 
         public MainPanel(Action<int> allOperations, Action<int, int> filteredOperations, Action<MyWallet, int, double> makeOperation)
         {
             OperationMaker = new(() => { CommandFilterByCategory?.OnCanExecuteChanged(); },
-                () => { CommandMakeOperation?.OnCanExecuteChanged(); },
+                () => { CommandMakeOperationIncome?.OnCanExecuteChanged(); },
+                () => { CommandMakeOperationExpense?.OnCanExecuteChanged(); },
                 allOperations, filteredOperations, makeOperation);
 
             CommandFilterByCategory = new(_ =>
@@ -23,10 +26,15 @@ namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
                 OperationMaker.FilterByCategory();
             }, _ => OperationMaker.CanFilter());
 
-            CommandMakeOperation = new(_ =>
+            CommandMakeOperationIncome = new(_ =>
             {
                 OperationMaker.MakeOperation();
-            }, _ => OperationMaker.CanMakeOperaton());
+            }, _ => OperationMaker.CanMakeOperationIncome());
+
+            CommandMakeOperationExpense = new(_ =>
+            {
+                OperationMaker.MakeOperation();
+            }, _ => OperationMaker.CanMakeOperationExpense());
         }
     }
 }

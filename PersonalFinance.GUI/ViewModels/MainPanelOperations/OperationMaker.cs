@@ -7,7 +7,8 @@ namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
     public class OperationMaker : Notifier
     {
         private readonly Action _canFilter;
-        private readonly Action _canMakeOperation;
+        private readonly Action _canMakeOperationIncome;
+        private readonly Action _canMakeOperationExpense;
         private readonly Action<int> _allOperations;
         private readonly Action<int, int> _filteredOperations;
         private readonly Action<MyWallet, int, double> _makeOperation;
@@ -24,7 +25,8 @@ namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
                     _allOperations.Invoke(_selectedWallet.WalletId);
                 }
                 _canFilter.Invoke();
-                _canMakeOperation.Invoke();
+                _canMakeOperationIncome.Invoke();
+                _canMakeOperationExpense.Invoke();
             }
         }
 
@@ -41,7 +43,7 @@ namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
                     SelectedCategoryExpense = null;
                     SumExpense = null;
                 }
-                _canMakeOperation.Invoke();
+                _canMakeOperationIncome.Invoke();
             }
         }
 
@@ -63,7 +65,7 @@ namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
                     SelectedCategoryExpense = null;
                     SumExpense = null;
                 }
-                _canMakeOperation.Invoke();
+                _canMakeOperationIncome.Invoke();
             }
         }
 
@@ -80,7 +82,7 @@ namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
                     SelectedCategoryIncome = null;
                     SumIncome = null;
                 }
-                _canMakeOperation.Invoke();
+                _canMakeOperationExpense.Invoke();
             }
         }
 
@@ -102,7 +104,7 @@ namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
                     SelectedCategoryIncome = null;
                     SumIncome = null;
                 }
-                _canMakeOperation.Invoke();
+                _canMakeOperationExpense.Invoke();
             }
         }
 
@@ -122,10 +124,11 @@ namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
             }
         }
 
-        public OperationMaker(Action canFilter, Action canMakeOperation, Action<int> allOperations, Action<int, int> filteredOperations, Action<MyWallet, int, double> makeOperation)
+        public OperationMaker(Action canFilter, Action canMakeOperationIncome, Action canMakeOperationExpense, Action<int> allOperations, Action<int, int> filteredOperations, Action<MyWallet, int, double> makeOperation)
         {
             _canFilter = canFilter;
-            _canMakeOperation = canMakeOperation;
+            _canMakeOperationIncome = canMakeOperationIncome;
+            _canMakeOperationExpense = canMakeOperationExpense;
             _allOperations = allOperations;
             _filteredOperations = filteredOperations;
             _makeOperation = makeOperation;
@@ -157,10 +160,15 @@ namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
             Clear();
         }
 
-        public bool CanMakeOperaton()
+        public bool CanMakeOperationIncome()
         {
-            return (SelectedWallet is not null && SelectedCategoryIncome is not null && SumIncome is not null) ||
-                   (SelectedWallet is not null && SelectedCategoryExpense is not null && SumExpense is not null && (SelectedWallet.Balance - double.Parse(SumExpense, System.Globalization.CultureInfo.InvariantCulture) >= 0));
+            return SelectedWallet is not null && SelectedCategoryIncome is not null && !string.IsNullOrWhiteSpace(SumIncome);
+        }
+
+        public bool CanMakeOperationExpense()
+        {
+            return SelectedWallet is not null && SelectedCategoryExpense is not null && !string.IsNullOrWhiteSpace(SumExpense) &&
+                  (SelectedWallet.Balance - double.Parse(SumExpense, System.Globalization.CultureInfo.InvariantCulture) >= 0);
         }
 
         private void Clear()
