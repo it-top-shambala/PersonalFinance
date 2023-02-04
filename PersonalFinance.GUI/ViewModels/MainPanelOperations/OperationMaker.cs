@@ -123,6 +123,9 @@ namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
                 if (value is not null)
                 {
                     SelectedCategoryIncome = null;
+                    SumIncome = null;
+                    SelectedCategoryExpense = null;
+                    SumExpense = null;
                 }
                 _canFilter.Invoke();
             }
