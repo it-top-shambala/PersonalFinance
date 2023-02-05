@@ -174,8 +174,9 @@ namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
 
         public bool CanMakeOperationExpense()
         {
-            return SelectedWallet is not null && SelectedCategoryExpense is not null && !string.IsNullOrWhiteSpace(SumExpense) &&
-                  (SelectedWallet.Balance - SumFormatter.MakeDouble(SumExpense) >= 0);
+            return SelectedWallet is not null && SelectedCategoryExpense is not null &&
+                   !string.IsNullOrWhiteSpace(SumExpense) &&
+                   !SelectedWallet.SumExceedsBalance(SumFormatter.MakeDouble(SumExpense));
         }
 
         private void Clear()

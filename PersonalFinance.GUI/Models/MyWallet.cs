@@ -15,5 +15,10 @@ namespace PersonalFinance.GUI.Models
             CurrencyName = wallet.CurrencyName;
             Balance = wallet.Balance;
         }
+
+        public bool SumExceedsBalance(double sum)
+        {
+            return Balance - sum < 0;
+        }
     }
 }
