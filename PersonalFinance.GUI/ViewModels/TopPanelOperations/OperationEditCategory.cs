@@ -44,7 +44,7 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
             _editCategory = editCategory;
         }
 
-        public override bool RefreshStates()
+        public override bool RefreshState()
         {
             return !string.IsNullOrWhiteSpace(Name) && (SelectedCategoryIncome is not null || SelectedCategoryExpense is not null);
         }

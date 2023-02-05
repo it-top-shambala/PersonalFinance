@@ -23,7 +23,7 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
             _editWallet = editWallet;
         }
 
-        public override bool RefreshStates()
+        public override bool RefreshState()
         {
             return !string.IsNullOrWhiteSpace(Name) && SelectedWallet is not null;
         }

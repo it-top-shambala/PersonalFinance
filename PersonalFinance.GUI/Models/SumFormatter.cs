@@ -39,5 +39,15 @@ namespace PersonalFinance.GUI.Models
                 str = str.Remove(str.IndexOf(',') + 3);
             }
         }
+
+        public static double MakeDouble(string sumInput)
+        {
+            return sumInput == string.Empty ? 0 : double.Parse(sumInput, System.Globalization.CultureInfo.InvariantCulture);
+        }
+
+        public static double MakeDouble(string? sumIncome, string? sumExpense)
+        {
+            return sumIncome is not null ? double.Parse(sumIncome!, System.Globalization.CultureInfo.InvariantCulture) : -double.Parse(sumExpense!, System.Globalization.CultureInfo.InvariantCulture);
+        }
     }
 }

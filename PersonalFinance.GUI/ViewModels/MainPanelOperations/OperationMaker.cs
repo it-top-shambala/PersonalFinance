@@ -162,7 +162,7 @@ namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
         public void MakeOperation()
         {
             var categoryId = SelectedCategoryIncome is not null ? SelectedCategoryIncome.CategoryId : SelectedCategoryExpense!.CategoryId;
-            var sum = SumIncome is not null ? double.Parse(SumIncome!, System.Globalization.CultureInfo.InvariantCulture) : -double.Parse(SumExpense!, System.Globalization.CultureInfo.InvariantCulture);
+            var sum = SumFormatter.MakeDouble(SumIncome, SumExpense);
             _makeOperation.Invoke(SelectedWallet!, categoryId, sum);
             Clear();
         }
@@ -175,7 +175,7 @@ namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
         public bool CanMakeOperationExpense()
         {
             return SelectedWallet is not null && SelectedCategoryExpense is not null && !string.IsNullOrWhiteSpace(SumExpense) &&
-                  (SelectedWallet.Balance - double.Parse(SumExpense, System.Globalization.CultureInfo.InvariantCulture) >= 0);
+                  (SelectedWallet.Balance - SumFormatter.MakeDouble(SumExpense) >= 0);
         }
 
         private void Clear()

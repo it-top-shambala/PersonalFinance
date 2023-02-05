@@ -19,7 +19,7 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
                 SumFormatter.Cut(ref value!);
                 if (SetField(ref _sum, value))
                 {
-                    RefreshState?.Invoke();
+                    Refresh?.Invoke();
                 }
             }
         }
@@ -32,7 +32,7 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
             {
                 if (SetField(ref _selectedCurrency, value))
                 {
-                    RefreshState?.Invoke();
+                    Refresh?.Invoke();
                 }
             }
         }
@@ -47,7 +47,7 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
             {
                 if (SetField(ref _selectedImage, value))
                 {
-                    RefreshState?.Invoke();
+                    Refresh?.Invoke();
                 }
             }
         }
@@ -68,12 +68,12 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
 
         public override void Create()
         {
-            var sum = Sum == string.Empty ? 0 : double.Parse(Sum!, System.Globalization.CultureInfo.InvariantCulture);
+            var sum = SumFormatter.MakeDouble(Sum!);
             _addWallet.Invoke(Name!, SelectedCurrency!, sum, SelectedImage!.Path!);
             Clear();
         }
 
-        public override bool RefreshStates()
+        public override bool RefreshState()
         {
             return !string.IsNullOrWhiteSpace(Name) && SelectedCurrency is not null && !string.IsNullOrWhiteSpace(SelectedImage?.Path);
         }

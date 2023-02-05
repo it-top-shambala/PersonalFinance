@@ -5,7 +5,7 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
 {
     public abstract class OperationAbstract : Notifier
     {
-        protected Action RefreshState { get; init; }
+        protected Action Refresh { get; init; }
 
         private string? _name;
         public string? Name
@@ -15,7 +15,7 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
             {
                 if (SetField(ref _name, value))
                 {
-                    RefreshState?.Invoke();
+                    Refresh?.Invoke();
                 }
             }
         }
@@ -29,7 +29,7 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
 
         protected OperationAbstract(Action action)
         {
-            RefreshState = action;
+            Refresh = action;
             _isVisible = Visibility.Collapsed;
         }
 
@@ -65,7 +65,7 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
             IsVisible = Visibility.Collapsed;
         }
 
-        public virtual bool RefreshStates()
+        public virtual bool RefreshState()
         {
             return !string.IsNullOrWhiteSpace(Name);
         }

@@ -43,7 +43,7 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
             CommandCreateWallet = new(_ =>
             {
                 CreateWallet.Create();
-            }, _ => CreateWallet.RefreshStates());
+            }, _ => CreateWallet.RefreshState());
 
 
             EditWallet = new(() => { CommandEditWallet?.OnCanExecuteChanged(); }, editWallet);
@@ -57,7 +57,7 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
             CommandEditWallet = new(_ =>
             {
                 EditWallet.Create();
-            }, _ => EditWallet.RefreshStates());
+            }, _ => EditWallet.RefreshState());
 
 
             CreateCategory = new(() => { CommandCreateCategory?.OnCanExecuteChanged(); }, addCategory);
@@ -71,7 +71,7 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
             CommandCreateCategory = new(_ =>
             {
                 CreateCategory.Create();
-            }, _ => CreateCategory.RefreshStates());
+            }, _ => CreateCategory.RefreshState());
 
 
             EditCategory = new(() => { CommandEditCategory?.OnCanExecuteChanged(); }, editCategory);
@@ -85,7 +85,7 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
             CommandEditCategory = new(_ =>
             {
                 EditCategory.Create();
-            }, _ => EditCategory.RefreshStates());
+            }, _ => EditCategory.RefreshState());
 
             Height = 47;
         }
