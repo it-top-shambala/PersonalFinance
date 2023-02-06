@@ -19,7 +19,7 @@ namespace PersonalFinance.Lib.DAL
         int DeleteCategory(int id);
 
         bool UpdateWallet(int id, string newName);
-        bool UpdateCategoryg(int id, string newName);
+        bool UpdateCategory(int id, string newName);
 
         bool Transaction(int walletId, int categoryId, double summa);
     }

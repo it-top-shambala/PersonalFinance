@@ -126,7 +126,7 @@ namespace PersonalFinance.Lib.DAL
                 return res != 0;
             }
         }
-        public bool UpdateCategoryg(int id, string newName)
+        public bool UpdateCategory(int id, string newName)
         {
             using var connection = new SqlConnection(connectionString);
             var check = "SELECT * FROM tab_categories WHERE name = " + $"{newName}";

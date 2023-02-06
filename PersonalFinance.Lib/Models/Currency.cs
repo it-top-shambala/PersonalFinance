@@ -18,6 +18,6 @@ namespace PersonalFinance.Lib.Models
         /// <summary>
         ///  код валюты
         /// </summary>
-        public int Code { get; set; }
+        public string Code { get; set; }
     }
 }
