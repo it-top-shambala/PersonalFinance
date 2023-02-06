@@ -1,8 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFinance.Lib", "PersonalFinance.Lib\PersonalFinance.Lib.csproj", "{E558ABC4-A0B7-4C6B-8495-AC9AD209FDD5}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalFinance.Lib", "PersonalFinance.Lib\PersonalFinance.Lib.csproj", "{E558ABC4-A0B7-4C6B-8495-AC9AD209FDD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFinance.GUI", "PersonalFinance.GUI\PersonalFinance.GUI.csproj", "{28276D16-F50C-46E9-9372-3FE2C701E845}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalFinance.GUI", "PersonalFinance.GUI\PersonalFinance.GUI.csproj", "{28276D16-F50C-46E9-9372-3FE2C701E845}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFinance.IntenalAPI.lib", "PersonalFinance.IntenalAPI.lib\PersonalFinance.IntenalAPI.lib.csproj", "{66C364A5-1CB5-4270-B8F3-E7BBF526F026}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +23,15 @@ Global
 		{28276D16-F50C-46E9-9372-3FE2C701E845}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28276D16-F50C-46E9-9372-3FE2C701E845}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28276D16-F50C-46E9-9372-3FE2C701E845}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66C364A5-1CB5-4270-B8F3-E7BBF526F026}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66C364A5-1CB5-4270-B8F3-E7BBF526F026}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66C364A5-1CB5-4270-B8F3-E7BBF526F026}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66C364A5-1CB5-4270-B8F3-E7BBF526F026}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F70B2FC2-26B0-44C9-B2CC-AE6C31E44658}
 	EndGlobalSection
 EndGlobal
