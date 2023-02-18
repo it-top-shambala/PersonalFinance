@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -22,7 +23,9 @@ namespace PersonalFinance.GUI.ViewModels
 
         private readonly Financier _db;
 
-        public AllData()
+        private readonly Action _refreshOperations;
+
+        public AllData(Action action)
         {
             _db = new(new PersonalFinanceDbContext());
 
@@ -47,6 +50,8 @@ namespace PersonalFinance.GUI.ViewModels
             AllCategoriesInit();
 
             Operations = new();
+
+            _refreshOperations = action;
         }
         public void AddWallet(string name, Currency currency, double sum, string background)
         {
@@ -99,6 +104,8 @@ namespace PersonalFinance.GUI.ViewModels
                 CategoriesExpense[index] = category;
             }
             AllCategoriesInit();
+
+            _refreshOperations.Invoke();
         }
 
         public void ShowAllOperations(int walletId)

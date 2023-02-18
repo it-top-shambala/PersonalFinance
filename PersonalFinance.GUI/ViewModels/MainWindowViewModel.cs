@@ -13,7 +13,7 @@ namespace PersonalFinance.GUI.ViewModels
 
         public MainWindowViewModel()
         {
-            Data = new();
+            Data = new(() => { MainPanel?.OperationMaker?.AllOperations(); });
             TopPanel = new(Data.AddWallet, Data.EditWallet, Data.AddCategory, Data.EditCategory);
             MainPanel = new(Data.ShowAllOperations, Data.ShowFilteredOperations, Data.MakeOperation);
         }
