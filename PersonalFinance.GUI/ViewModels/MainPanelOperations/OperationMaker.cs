@@ -143,14 +143,13 @@ namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
 
         public void FilterByCategory()
         {
-            if (SelectedCategoryIncome is not null)
-            {
-                _filteredOperations.Invoke(_selectedWallet!.WalletId, SelectedCategoryIncome.CategoryId);
-            }
-            else
-            {
-                _filteredOperations.Invoke(_selectedWallet!.WalletId, SelectedCategoryExpense!.CategoryId);
-            }
+            _filteredOperations.Invoke(_selectedWallet!.WalletId, FilterCategory!.CategoryId);
+            Clear();
+        }
+
+        public void AllOperations()
+        {
+            _allOperations.Invoke(_selectedWallet!.WalletId);
             Clear();
         }
 

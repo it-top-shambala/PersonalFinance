@@ -39,17 +39,18 @@ namespace PersonalFinance.Lib.DAL
             using var conn = new MySqlConnection(connectionString);
             return conn.Query<Operation>("SELECT operation_id, wallet_id, operation_date, tab_categories.category_name AS category_name, sum " +
                 "FROM tab_operations JOIN tab_categories " +
-                "ON tab_operations.category_id = tab_categories.category_id AND " +
-                "tab_operations.wallet_id = " + $"{idWallet}");
+                "ON tab_operations.category_id = tab_categories.category_id WHERE " +
+                "wallet_id = " + $"{idWallet}");
         }
 
         public IEnumerable<Operation> GetLogs(int idWallet, int categoryId)
         {
             using var conn = new MySqlConnection(connectionString);
-            return conn.Query<Operation>("SELECT operation_id, wallet_id, operation_date, tab_categories.category_name AS category_name, sum " +
-                "FROM tab_operations JOIN tab_categories " +
-                "ON tab_operations.category_id = tab_categories.category_id AND " +
-                "tab_operations.wallet_id = " + $"{idWallet} AND tab_operations.category_id={categoryId}");
+            return conn.Query<Operation>("CREATE VIEW temp_view AS SELECT * FROM tab_operations " +
+                $"WHERE wallet_id = {idWallet} AND category_id = {categoryId}; " +
+                "SELECT operation_id, wallet_id, operation_date, category_name, sum " +
+                "FROM temp_view JOIN tab_categories ON tab_categories.category_id = temp_view.category_id; " +
+                "DROP VIEW temp_view;");
         }
 
         public Wallet GetWallet(int id)
@@ -160,12 +161,13 @@ namespace PersonalFinance.Lib.DAL
         {
             using var connection = new MySqlConnection(connectionString);
             var date = DateTime.Now;
-            var queryInsert = "INSERT INTO tab_operations (operation_date,wallet_id,category_id,sum)" +
-                $"VALUES ({date},@WalletId,@CategoryId,@Summa)";
-            var result = connection.Execute(queryInsert, new { WalletId = walletId, CategoryId = categoryId, Summa = summa });
-            var queryOperation = "SELECT operation_id, wallet_id, operation_date, tab_categories.category_name AS category_name, sum " +
-                "FROM tab_operations JOIN tab_categories " +
-                $"ON tab_operations.category_id = tab_categories.category_id WHERE wallet_id={walletId} AND operation_date = {date}";
+            var textDate = date.ToString("u");
+            textDate = textDate.Remove(textDate.Length - 1);
+            var queryInsert = $"INSERT INTO tab_operations (operation_date, wallet_id, category_id, sum) VALUES ('{textDate}', {walletId}, {categoryId}, {summa})";
+            var result = connection.Execute(queryInsert);
+            var queryOperation = $"SELECT operation_id, wallet_id, operation_date, category_name, sum " +
+                $"FROM tab_operations JOIN tab_categories ON tab_operations.category_id = tab_categories.category_id " +
+                $"WHERE wallet_id={walletId} AND operation_date = '{textDate}'";
             var operation = connection.Query<Operation>(queryOperation).First();
             if (result == 0)
             {
@@ -173,8 +175,8 @@ namespace PersonalFinance.Lib.DAL
             }
             else
             {
-                var queryUpdate = "UPDATE tab_wallets SET balance=balance+@Summa WHERE wallet_id=@WalletId";
-                var res = connection.Execute(queryUpdate, new { Summa = summa, WalletId = walletId });
+                var queryUpdate = $"UPDATE tab_wallets SET balance=balance+{summa} WHERE wallet_id={walletId}";
+                var res = connection.Execute(queryUpdate);
                 return (res != 0, operation!);
             }
         }

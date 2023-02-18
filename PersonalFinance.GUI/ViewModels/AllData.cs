@@ -47,6 +47,8 @@ namespace PersonalFinance.GUI.ViewModels
 
             AllCategoriesInit();
 
+            Operations = new();
+
             ////для теста
             //Wallets = new ObservableCollection<MyWallet>();
 
@@ -136,12 +138,20 @@ namespace PersonalFinance.GUI.ViewModels
 
         public void ShowAllOperations(int walletId)
         {
-            Operations = new(_db.GetAllWalletOperations(walletId));
+            Operations!.Clear();
+            foreach (var o in _db.GetAllWalletOperations(walletId).ToList())
+            {
+                Operations.Add(o);
+            }
         }
 
         public void ShowFilteredOperations(int walletId, int categoryId)
         {
-            Operations = new(_db.GetFilteredWalletOperations(walletId, categoryId));
+            Operations!.Clear();
+            foreach (var o in _db.GetFilteredWalletOperations(walletId, categoryId).ToList())
+            {
+                Operations.Add(o);
+            }
         }
 
         public void MakeOperation(MyWallet wallet, int categoryId, double sum)

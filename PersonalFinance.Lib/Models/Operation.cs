@@ -1,3 +1,5 @@
+using Dapper.Contrib.Extensions;
+
 namespace PersonalFinance.Lib.Models
 {
     /// <summary>
@@ -18,9 +20,25 @@ namespace PersonalFinance.Lib.Models
         /// <summary>
         /// время проведения операции
         /// </summary>
-        public DateTime? OperationDate { get; set; }
+        [Computed]
+        public DateTime? Date { get; set; }
 
-        /// <summary>
+        private string? _date;
+        public string? OperationDate
+        {
+            get => _date;
+            set
+            {
+                _date = value;
+                if (_date != null)
+                {
+                    Date = DateTime.ParseExact(_date, "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                }
+
+            }
+        }
+
+        /// <summary>S
         /// имя категории операции
         /// </summary>
         public string? CategoryName { get; set; }

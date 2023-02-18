@@ -175,9 +175,9 @@
                               CanUserAddRows="False" 
                               CanUserDeleteRows="False">
                     <DataGrid.Columns>
-                        <materialDesign:DataGridTextColumn Header="Сумма операции" Binding="{Binding Summa}" Width="Auto" IsReadOnly="True"/>
+                        <materialDesign:DataGridTextColumn Header="Сумма операции" Binding="{Binding Sum}" Width="Auto" IsReadOnly="True"/>
                         <materialDesign:DataGridTextColumn Header="Категория" Binding="{Binding CategoryName}" Width="Auto" IsReadOnly="True"/>
-                        <materialDesign:DataGridTextColumn Header="Дата" Binding="{Binding DateTime}" Width="Auto" IsReadOnly="True"/>
+                        <materialDesign:DataGridTextColumn Header="Дата" Binding="{Binding Date}" Width="Auto" IsReadOnly="True"/>
                     </DataGrid.Columns>
                 </DataGrid>
 
@@ -228,6 +228,8 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <Button Content="Фильтровать" Command="{Binding MainPanel.CommandFilterByCategory}" Margin="10" Cursor="Hand"/>
+
+                <Button Content="Все операции" Command="{Binding MainPanel.CommandShowAllOperations}" Margin="10" Cursor="Hand" Visibility="{Binding MainPanel.AllOperationsButtonVisibility}"/>
             </StackPanel>
         </Grid>
     </Grid>
