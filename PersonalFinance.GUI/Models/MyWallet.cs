@@ -11,7 +11,7 @@ namespace PersonalFinance.GUI.Models
         public MyWallet(Wallet wallet)
         {
             WalletId = wallet.WalletId;
-            Name = wallet.Name;
+            WalletName = wallet.WalletName;
             CurrencyName = wallet.CurrencyName;
             Balance = wallet.Balance;
         }

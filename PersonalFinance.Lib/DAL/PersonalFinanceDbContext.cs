@@ -73,7 +73,7 @@ namespace PersonalFinance.Lib.DAL
         public int CreateWallet(string name, Currency currency, double startSum)
         {
             using var connection = new MySqlConnection(connectionString);
-            var query = $"INSERT INTO tab_wallets (wallet_name,balance,currency_id) VALUES ({name},{startSum},{currency}); SELECT CAST(SCOPE_IDENTITY() as int)";
+            var query = $"INSERT INTO tab_wallets (wallet_name,balance,currency_id) VALUES ('{name}',{startSum},{currency.CurrencyId});";
             var result = connection.Execute(query);
             if (result == 0)
             {
@@ -88,7 +88,7 @@ namespace PersonalFinance.Lib.DAL
         public int CreateCategory(string name, bool type)
         {
             using var connection = new MySqlConnection(connectionString);
-            var query = $"INSERT INTO tab_categories (category_name,type) VALUES ('{name}', {type}); SELECT CAST(SCOPE_IDENTITY() as int)";
+            var query = $"INSERT INTO tab_categories (category_name,type) VALUES ('{name}', {type});";
             var result = connection.Execute(query);
             if (result == 0)
             {
@@ -131,7 +131,7 @@ namespace PersonalFinance.Lib.DAL
             }
             else
             {
-                var query = "UPDATE tab_wallets SET wallet_name = " + $"{newName} WHERE wallet_id = " + $"{id}";
+                var query = "UPDATE tab_wallets SET wallet_name = " + $"'{newName}' WHERE wallet_id = " + $"{id}";
                 var res = connection.Execute(query);
                 return res != 0;
             }
@@ -147,7 +147,7 @@ namespace PersonalFinance.Lib.DAL
             }
             else
             {
-                var query = "UPDATE tab_categories SET category_name = " + $"{newName} WHERE category_id = " + $"{id}";
+                var query = "UPDATE tab_categories SET category_name = " + $"'{newName}' WHERE category_id = " + $"{id}";
                 var res = connection.Execute(query);
                 return res != 0;
             }

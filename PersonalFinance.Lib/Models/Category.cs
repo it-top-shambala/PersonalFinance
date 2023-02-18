@@ -13,7 +13,7 @@ namespace PersonalFinance.Lib.Models
         /// <summary>
         /// имя категории
         /// </summary>
-        public string? Name { get; set; }
+        public string? CategoryName { get; set; }
 
         /// <summary>
         /// тип  категории (0 - расход, 1 - приход)

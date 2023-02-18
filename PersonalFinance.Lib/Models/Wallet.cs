@@ -13,7 +13,7 @@ namespace PersonalFinance.Lib.Models
         /// <summary>
         ///  имя кошелька
         /// </summary>
-        public string? Name { get; set; }
+        public string? WalletName { get; set; }
 
         /// <summary>
         /// имя категории операции

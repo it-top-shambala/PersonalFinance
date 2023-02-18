@@ -45,7 +45,7 @@
                           Width="80" Margin="0,0,10,0">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text="{Binding CurrencyName}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
@@ -73,7 +73,7 @@
                           Width="200" >
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text="{Binding WalletName}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
@@ -105,7 +105,7 @@
                           Width="200" >
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding CategoryName}"/>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
@@ -115,7 +115,7 @@
                           Width="200">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding CategoryName}"/>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
@@ -145,7 +145,7 @@
                                     <ImageBrush ImageSource="{Binding Background}"/>
                                 </Border.Background>
                                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding Name}" Foreground="White" FontSize="20" HorizontalAlignment="Center" >
+                                    <TextBlock Text="{Binding WalletName}" Foreground="White" FontSize="20" HorizontalAlignment="Center" >
                                         <TextBlock.Effect>
                                             <DropShadowEffect Color="#FF673AB7" Direction="-30" BlurRadius="-3" ShadowDepth="2" />
                                         </TextBlock.Effect>
@@ -189,7 +189,7 @@
                           Width="200" >
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text="{Binding CategoryName}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
@@ -206,7 +206,7 @@
                           Margin="0,30,0,0">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text="{Binding CategoryName}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
@@ -223,7 +223,7 @@
                           Margin="0,30,0,0">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text="{Binding CategoryName}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>

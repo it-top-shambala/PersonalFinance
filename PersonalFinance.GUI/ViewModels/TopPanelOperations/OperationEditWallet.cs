@@ -14,7 +14,7 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
             set
             {
                 _ = SetField(ref _selectedWallet, value);
-                Name = _selectedWallet?.Name;
+                Name = _selectedWallet?.WalletName;
             }
         }
 

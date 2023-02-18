@@ -17,7 +17,7 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
                 OnPropertyChanged();
                 if (value is not null)
                 {
-                    Name = _categoryIncome?.Name;
+                    Name = _categoryIncome?.CategoryName;
                     SelectedCategoryExpense = null;
                 }
             }
@@ -33,7 +33,7 @@ namespace PersonalFinance.GUI.ViewModels.TopPanelOperations
                 OnPropertyChanged();
                 if (value is not null)
                 {
-                    Name = _categoryExpense?.Name;
+                    Name = _categoryExpense?.CategoryName;
                     SelectedCategoryIncome = null;
                 }
             }

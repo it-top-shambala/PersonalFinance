@@ -120,14 +120,14 @@ namespace PersonalFinance.GUI.ViewModels
             if (income is not null)
             {
                 _db.EditCategoryName(income.CategoryId, newName);
-                var category = new Category { CategoryId = income.CategoryId, Name = newName, Type = income.Type };
+                var category = new Category { CategoryId = income.CategoryId, CategoryName = newName, Type = income.Type };
                 var index = CategoriesIncome.IndexOf(income);
                 CategoriesIncome[index] = category;
             }
             else
             {
                 _db.EditCategoryName(expense.CategoryId, newName);
-                var category = new Category { CategoryId = expense.CategoryId, Name = newName, Type = expense.Type };
+                var category = new Category { CategoryId = expense.CategoryId, CategoryName = newName, Type = expense.Type };
                 var index = CategoriesExpense.IndexOf(expense);
                 CategoriesExpense[index] = category;
             }
@@ -170,7 +170,7 @@ namespace PersonalFinance.GUI.ViewModels
 
             AllCategories!.Clear();
 
-            foreach (var c in list.OrderBy(c => c.Name).ToList())
+            foreach (var c in list.OrderBy(c => c.CategoryName).ToList())
             {
                 AllCategories.Add(c);
             }

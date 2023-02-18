@@ -18,7 +18,7 @@ namespace PersonalFinance.Lib.Models
         /// <summary>
         /// время проведения операции
         /// </summary>
-        public DateTime? DateTime { get; set; }
+        public DateTime? OperationDate { get; set; }
 
         /// <summary>
         /// имя категории операции
@@ -28,6 +28,6 @@ namespace PersonalFinance.Lib.Models
         /// <summary>
         /// сумма операции
         /// </summary>
-        public double Summa { get; set; }
+        public double Sum { get; set; }
     }
 }
