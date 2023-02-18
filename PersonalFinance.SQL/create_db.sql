@@ -46,8 +46,3 @@ CREATE TABLE tab_operations
     FOREIGN KEY (category_id) REFERENCES tab_categories (category_id)
         ON UPDATE NO ACTION ON DELETE NO ACTION
 );
-
-CREATE VIEW temp_view AS SELECT * FROM tab_operations WHERE wallet_id = 1 AND category_id = 2;
-SELECT operation_id, wallet_id, operation_date, category_name, sum
-FROM temp_view JOIN tab_categories ON tab_categories.category_id = temp_view.category_id;
-DROP VIEW temp_view;
