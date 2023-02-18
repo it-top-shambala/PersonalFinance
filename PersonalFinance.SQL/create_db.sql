@@ -2,6 +2,7 @@ DROP TABLE tab_operations;
 DROP TABLE tab_wallets;
 DROP TABLE tab_categories;
 DROP TABLE tab_currencies;
+DROP TABLE tab_backgrounds;
 
 CREATE TABLE tab_currencies
 (
@@ -45,4 +46,10 @@ CREATE TABLE tab_operations
         ON UPDATE NO ACTION ON DELETE NO ACTION,
     FOREIGN KEY (category_id) REFERENCES tab_categories (category_id)
         ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
+CREATE TABLE tab_backgrounds
+(
+    wallet_id  INT          NOT NULL,
+    background VARCHAR(100) NOT NULL
 );
