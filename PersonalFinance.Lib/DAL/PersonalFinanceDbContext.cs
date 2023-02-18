@@ -1,6 +1,5 @@
-using System.Configuration;
 using Dapper;
-using Microsoft.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using PersonalFinance.Lib.Models;
 using Operation = PersonalFinance.Lib.Models.Operation;
 
@@ -11,7 +10,7 @@ namespace PersonalFinance.Lib.DAL
         private readonly string connectionString;
         public PersonalFinanceDbContext()
         {
-            connectionString = ConfigurationManager.ConnectionStrings["MyConnString"].ConnectionString;
+            connectionString = DbConfig.GetConnectionString("constr.txt");
             DefaultTypeMap.MatchNamesWithUnderscores = true;
         }
 
@@ -20,24 +19,24 @@ namespace PersonalFinance.Lib.DAL
         /// </summary>
         public IEnumerable<Wallet> GetWallets()
         {
-            using var conn = new SqlConnection(connectionString);
+            using var conn = new MySqlConnection(connectionString);
             return conn.Query<Wallet>("SELECT wallet_id,tab_wallets.wallet_name,tab_currencies.currency_name AS currency_name,balance" +
                 " FROM tab_wallets JOIN tab_currencies " +
                 "ON tab_wallets.currency_id = tab_currencies.currency_id");
         }
         public IEnumerable<Currency> GetCurrencies()
         {
-            using var conn = new SqlConnection(connectionString);
+            using var conn = new MySqlConnection(connectionString);
             return conn.Query<Currency>("SELECT * FROM tab_currencies");
         }
         public IEnumerable<Category> GetCategories()
         {
-            using var conn = new SqlConnection(connectionString);
+            using var conn = new MySqlConnection(connectionString);
             return conn.Query<Category>("SELECT * FROM tab_categories");
         }
         public IEnumerable<Operation> GetLogs(int idWallet)
         {
-            using var conn = new SqlConnection(connectionString);
+            using var conn = new MySqlConnection(connectionString);
             return conn.Query<Operation>("SELECT operation_id, wallet_id, operation_date, tab_categories.category_name AS category_name, sum " +
                 "FROM tab_operations JOIN tab_categories " +
                 "ON tab_operations.category_id = tab_categories.category_id AND " +
@@ -46,7 +45,7 @@ namespace PersonalFinance.Lib.DAL
 
         public IEnumerable<Operation> GetLogs(int idWallet, int categoryId)
         {
-            using var conn = new SqlConnection(connectionString);
+            using var conn = new MySqlConnection(connectionString);
             return conn.Query<Operation>("SELECT operation_id, wallet_id, operation_date, tab_categories.category_name AS category_name, sum " +
                 "FROM tab_operations JOIN tab_categories " +
                 "ON tab_operations.category_id = tab_categories.category_id AND " +
@@ -58,13 +57,13 @@ namespace PersonalFinance.Lib.DAL
             var query = "SELECT wallet_id,tab_wallets.wallet_name,tab_currencies.currency_name AS currency_name,balance" +
                 " FROM tab_wallets JOIN tab_currencies " +
                 "ON tab_wallets.currency_id = tab_currencies.currency_id AND wallet_id=" + $"{id}";
-            using var connection = new SqlConnection(connectionString);
+            using var connection = new MySqlConnection(connectionString);
             return connection.QuerySingle<Wallet>(query);
         }
         public Category GetCategory(int id)
         {
             var query = "SELECT * FROM tab_categories WHERE category_id=" + $"{id}";
-            using var connection = new SqlConnection(connectionString);
+            using var connection = new MySqlConnection(connectionString);
             return connection.QuerySingle<Category>(query);
         }
 
@@ -73,7 +72,7 @@ namespace PersonalFinance.Lib.DAL
         /// </summary>
         public int CreateWallet(string name, Currency currency, double startSum)
         {
-            using var connection = new SqlConnection(connectionString);
+            using var connection = new MySqlConnection(connectionString);
             var query = $"INSERT INTO tab_wallets (wallet_name,balance,currency_id) VALUES ({name},{startSum},{currency}); SELECT CAST(SCOPE_IDENTITY() as int)";
             var result = connection.Execute(query);
             if (result == 0)
@@ -88,7 +87,7 @@ namespace PersonalFinance.Lib.DAL
         }
         public int CreateCategory(string name, bool type)
         {
-            using var connection = new SqlConnection(connectionString);
+            using var connection = new MySqlConnection(connectionString);
             var query = $"INSERT INTO tab_categories (category_name,type) VALUES ('{name}', {type}); SELECT CAST(SCOPE_IDENTITY() as int)";
             var result = connection.Execute(query);
             if (result == 0)
@@ -107,13 +106,13 @@ namespace PersonalFinance.Lib.DAL
         /// </summary>
         public int DeleteWallet(int id)
         {
-            using var connection = new SqlConnection(connectionString);
+            using var connection = new MySqlConnection(connectionString);
             var query = "DELETE FROM tab_wallets WHERE wallet_id= @id";
             return connection.Execute(query, new { id });
         }
         public int DeleteCategory(int id)
         {
-            using var connection = new SqlConnection(connectionString);
+            using var connection = new MySqlConnection(connectionString);
             var query = "DELETE FROM tab_categories WHERE category_id= @id";
             return connection.Execute(query, new { id });
         }
@@ -123,7 +122,7 @@ namespace PersonalFinance.Lib.DAL
         /// </summary>
         public bool UpdateWallet(int id, string newName)
         {
-            using var connection = new SqlConnection(connectionString);
+            using var connection = new MySqlConnection(connectionString);
             var check = "SELECT * FROM tab_wallets WHERE wallet_id = " + $"{id}";
             var result = connection.Execute(check);
             if (result >= 1)
@@ -139,7 +138,7 @@ namespace PersonalFinance.Lib.DAL
         }
         public bool UpdateCategory(int id, string newName)
         {
-            using var connection = new SqlConnection(connectionString);
+            using var connection = new MySqlConnection(connectionString);
             var check = "SELECT * FROM tab_categories WHERE category_id = " + $"{id}";
             var result = connection.Execute(check);
             if (result >= 1)
@@ -159,7 +158,7 @@ namespace PersonalFinance.Lib.DAL
         /// </summary>
         public (bool, Operation?) Transaction(int walletId, int categoryId, double summa)
         {
-            using var connection = new SqlConnection(connectionString);
+            using var connection = new MySqlConnection(connectionString);
             var date = DateTime.Now;
             var queryInsert = "INSERT INTO tab_operations (operation_date,wallet_id,category_id,sum)" +
                 $"VALUES ({date},@WalletId,@CategoryId,@Summa)";
