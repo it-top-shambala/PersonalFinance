@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using PersonalFinance.GUI.Models;
+using PersonalFinance.Lib.BL;
+using PersonalFinance.Lib.DAL;
 using PersonalFinance.Lib.Models;
 
 namespace PersonalFinance.GUI.ViewModels
@@ -18,6 +20,8 @@ namespace PersonalFinance.GUI.ViewModels
         public List<Currency> Currencies { get; set; }
 
         public ObservableCollection<Operation>? Operations { get; set; }
+
+        private readonly Financier _db;
 
         public AllData()
         {
@@ -45,15 +49,17 @@ namespace PersonalFinance.GUI.ViewModels
             Wallets = new ObservableCollection<MyWallet>();
 
             CategoriesIncome = new ObservableCollection<Category>() { new Category { CategoryId = 1, Name = "Зарплата", Type = true } };
-            CategoriesExpense = new ObservableCollection<Category>() { new Category { CategoryId = 2, Name = "На пивко", Type = false } };
+            CategoriesExpense = new ObservableCollection<Category>() { new Category { CategoryId = 2, Name = "Продукты", Type = false } };
 
             AllCategories = new();
 
             AllCategoriesInit();
 
-            Currencies = new List<Currency> { new Currency { CurrencyId = 1, Code = 111, Name = "USD" } };
+            Currencies = new List<Currency> { new Currency { CurrencyId = 1, Code = "111", Name = "USD" } };
 
-            Operations = new() { new Operation { OperationId = 1, CategoryName = "На пивко", Summa = 2000, WalletId = 1, DateTime = DateTime.Now } };
+            Operations = new() { new Operation { OperationId = 1, CategoryName = "Зарплата", Summa = 1000, WalletId = 1, DateTime = DateTime.Now } };
+
+            _db = new(new PersonalFinanceDbContext());
         }
         public void AddWallet(string name, Currency currency, double sum, string background)
         {
