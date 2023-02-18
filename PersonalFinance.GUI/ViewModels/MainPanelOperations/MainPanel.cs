@@ -5,7 +5,7 @@ using PersonalFinance.GUI.ViewModels.Commands;
 
 namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
 {
-    public class MainPanel: Notifier
+    public class MainPanel : Notifier
     {
         public OperationMaker OperationMaker { get; set; }
 

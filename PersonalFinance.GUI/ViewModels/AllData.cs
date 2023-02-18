@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -48,16 +47,6 @@ namespace PersonalFinance.GUI.ViewModels
             AllCategoriesInit();
 
             Operations = new();
-
-            ////для теста
-            //Wallets = new ObservableCollection<MyWallet>();
-
-            //CategoriesIncome = new ObservableCollection<Category>() { new Category { CategoryId = 1, Name = "Зарплата", Type = true } };
-            //CategoriesExpense = new ObservableCollection<Category>() { new Category { CategoryId = 2, Name = "Продукты", Type = false } };
-
-            //Currencies = new List<Currency> { new Currency { CurrencyId = 1, Code = "111", Name = "USD" } };
-
-            //Operations = new() { new Operation { OperationId = 1, CategoryName = "Зарплата", Summa = 1000, WalletId = 1, DateTime = DateTime.Now } };
         }
         public void AddWallet(string name, Currency currency, double sum, string background)
         {
@@ -67,18 +56,6 @@ namespace PersonalFinance.GUI.ViewModels
             };
             WalletBackgroundSaver.Save(newWallet.WalletId, background);
             Wallets.Add(newWallet);
-
-            ////для теста
-            //var newWallet = new MyWallet
-            //{
-            //    WalletId = Wallets.Count == 0 ? 1 : Wallets[^1].WalletId + 1,
-            //    Name = name,
-            //    Balance = sum,
-            //    CurrencyName = currency.Name,
-            //    Background = background
-            //};
-            //Wallets.Add(newWallet);
-            //WalletBackgroundSaver.Save(newWallet.WalletId, background);
         }
 
         public void EditWallet(MyWallet wallet, string newName)
@@ -89,18 +66,6 @@ namespace PersonalFinance.GUI.ViewModels
             };
             var index = Wallets.IndexOf(wallet);
             Wallets[index] = updatedWallet;
-
-            ////для теста
-            //var newWallet = new MyWallet
-            //{
-            //    WalletId = wallet.WalletId,
-            //    Name = newName,
-            //    Balance = wallet.Balance,
-            //    CurrencyName = wallet.CurrencyName,
-            //    Background = wallet.Background
-            //};
-            //var index = Wallets.IndexOf(wallet);
-            //Wallets[index] = newWallet;
         }
 
         public void AddCategory(string name, bool type)
