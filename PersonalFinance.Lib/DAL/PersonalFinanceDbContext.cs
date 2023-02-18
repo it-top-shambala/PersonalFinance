@@ -182,12 +182,3 @@ namespace PersonalFinance.Lib.DAL
         }
     }
 }
-
-
-
-
-
-
-
-
-
