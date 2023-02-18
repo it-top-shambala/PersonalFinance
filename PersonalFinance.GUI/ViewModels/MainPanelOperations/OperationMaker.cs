@@ -151,7 +151,7 @@ namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
         {
             if (SelectedWallet is not null)
             {
-                _allOperations.Invoke(_selectedWallet.WalletId);
+                _allOperations.Invoke(SelectedWallet.WalletId);
             }
             Clear();
         }
