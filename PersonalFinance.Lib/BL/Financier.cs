@@ -36,6 +36,16 @@ namespace PersonalFinance.Lib.BL
             return _db.GetWallet(id) ?? null;
         }
 
+        public void AddBackground(int walletId, string background)
+        {
+            _db.AddWalletBackground(walletId, background);
+        }
+
+        public List<(int, string)> GetAllBackgrounds()
+        {
+            return _db.GetWalletBackgrounds().ToList();
+        }
+
         public Category? CreateCategory(string name, bool type)
         {
             var id = _db.CreateCategory(name, type);

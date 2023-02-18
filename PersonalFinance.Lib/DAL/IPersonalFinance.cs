@@ -14,6 +14,11 @@ namespace PersonalFinance.Lib.DAL
         Category GetCategory(int id);
 
         int CreateWallet(string name, Currency currency, double startSum);
+
+        void AddWalletBackground(int walletId, string background);
+
+        IEnumerable<(int, string)> GetWalletBackgrounds();
+
         int CreateCategory(string name, bool type);
 
         int DeleteWallet(int id);

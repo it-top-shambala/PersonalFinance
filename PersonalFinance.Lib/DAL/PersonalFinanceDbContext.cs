@@ -86,6 +86,21 @@ namespace PersonalFinance.Lib.DAL
                 return connection.Query<int>(query).First();
             }
         }
+
+        public void AddWalletBackground(int walletId, string background)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            var query = $"INSERT INTO tab_backgrounds (wallet_id, background) VALUES ({walletId},'{background}');";
+            _ = connection.Execute(query);
+        }
+
+        public IEnumerable<(int, string)> GetWalletBackgrounds()
+        {
+            using var connection = new MySqlConnection(connectionString);
+            var query = $"SELECT * FROM tab_backgrounds;";
+            return connection.Query<(int, string)>(query);
+        }
+
         public int CreateCategory(string name, bool type)
         {
             using var connection = new MySqlConnection(connectionString);

@@ -31,11 +31,11 @@ namespace PersonalFinance.GUI.ViewModels
 
             var list = _db.GetAllWallets();
             Wallets = new ObservableCollection<MyWallet>();
-            var backgrounds = WalletBackgroundSaver.Load();
+            var backgrounds = _db.GetAllBackgrounds();
             foreach (var item in list)
             {
                 var myWallet = new MyWallet(item);
-                myWallet.Background = backgrounds.Find(b => b.Id == myWallet.WalletId).Path;
+                myWallet.Background = backgrounds.Find(b => b.Item1 == myWallet.WalletId).Item2;
                 Wallets.Add(myWallet);
             }
 
@@ -59,7 +59,7 @@ namespace PersonalFinance.GUI.ViewModels
             {
                 Background = background
             };
-            WalletBackgroundSaver.Save(newWallet.WalletId, background);
+            _db.AddBackground(newWallet.WalletId, background);
             Wallets.Add(newWallet);
         }
 
