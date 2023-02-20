@@ -153,7 +153,7 @@ namespace PersonalFinance.GUI.ViewModels.MainPanelOperations
             {
                 _allOperations.Invoke(SelectedWallet.WalletId);
             }
-            Clear();
+            FilterCategory = null;
         }
 
         public bool CanFilter()

@@ -15,7 +15,7 @@ namespace PersonalFinance.Lib.DAL
         }
 
         /// <summary>
-        /// Методы полуения данных из бд
+        /// Методы получения данных из бд
         /// </summary>
         public IEnumerable<Wallet> GetWallets()
         {
@@ -68,6 +68,13 @@ namespace PersonalFinance.Lib.DAL
             return connection.QuerySingle<Category>(query);
         }
 
+        public IEnumerable<(int, string)> GetWalletBackgrounds()
+        {
+            using var connection = new MySqlConnection(connectionString);
+            var query = $"SELECT * FROM tab_backgrounds;";
+            return connection.Query<(int, string)>(query);
+        }
+
         /// <summary>
         /// Методы добавления данных в бд
         /// </summary>
@@ -92,13 +99,6 @@ namespace PersonalFinance.Lib.DAL
             using var connection = new MySqlConnection(connectionString);
             var query = $"INSERT INTO tab_backgrounds (wallet_id, background) VALUES ({walletId},'{background}');";
             _ = connection.Execute(query);
-        }
-
-        public IEnumerable<(int, string)> GetWalletBackgrounds()
-        {
-            using var connection = new MySqlConnection(connectionString);
-            var query = $"SELECT * FROM tab_backgrounds;";
-            return connection.Query<(int, string)>(query);
         }
 
         public int CreateCategory(string name, bool type)
@@ -152,6 +152,7 @@ namespace PersonalFinance.Lib.DAL
                 return res != 0;
             }
         }
+
         public bool UpdateCategory(int id, string newName)
         {
             using var connection = new MySqlConnection(connectionString);

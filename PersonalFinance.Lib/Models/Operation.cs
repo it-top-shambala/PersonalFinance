@@ -23,18 +23,17 @@ namespace PersonalFinance.Lib.Models
         [Computed]
         public DateTime? Date { get; set; }
 
-        private string? _date;
+        private string? _operationDate;
         public string? OperationDate
         {
-            get => _date;
+            get => _operationDate;
             set
             {
-                _date = value;
-                if (_date != null)
+                _operationDate = value;
+                if (_operationDate != null)
                 {
-                    Date = DateTime.ParseExact(_date, "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                    Date = DateTime.ParseExact(_operationDate, "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
                 }
-
             }
         }
 
