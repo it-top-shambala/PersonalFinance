@@ -13,11 +13,11 @@ namespace PersonalFinance.Lib.Models
         /// <summary>
         /// имя валюты
         /// </summary>
-        public string? Name { get; set; }
+        public string? CurrencyName { get; set; }
 
         /// <summary>
         ///  код валюты
         /// </summary>
-        public int Code { get; set; }
+        public string? CurrencyCode { get; set; }
     }
 }
